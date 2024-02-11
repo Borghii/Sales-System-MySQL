@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="create project">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/MenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/model/DBConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/ExampleView.fxml" afterDir="false" />
+    <list default="true" id="5d68daa5-a641-41ea-b0ee-75849b91ef2e" name="Changes" comment="feature: add login">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/HelloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/borghisales/salessysten/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/borghisales/salessysten/MainView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,11 +86,28 @@
       <option name="project" value="LOCAL" />
       <updated>1707617671752</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feature: add login">
+      <option name="closed" value="true" />
+      <created>1707622890390</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1707622890390</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feature: add login">
+      <option name="closed" value="true" />
+      <created>1707622903283</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1707622903283</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create project" />
-    <option name="LAST_COMMIT_MESSAGE" value="create project" />
+    <MESSAGE value="feature: add login" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature: add login" />
   </component>
 </project>
