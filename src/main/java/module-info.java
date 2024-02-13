@@ -5,5 +5,7 @@ module org.borghisales.salessysten {
 
 
     opens org.borghisales.salessysten to javafx.fxml;
+    exports org.borghisales.salessysten.controllers;
+    opens org.borghisales.salessysten.controllers to javafx.fxml;
     exports org.borghisales.salessysten;
 }

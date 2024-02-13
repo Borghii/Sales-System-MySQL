@@ -1,4 +1,4 @@
-package org.borghisales.salessysten;
+package org.borghisales.salessysten.controllers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,9 +12,12 @@ import java.util.HashMap;
 
 public class MenuController {
 
+    public static final String MAIN_VIEW_FXML = "/org/borghisales/salessysten/MainView.fxml";
+    public static final String MANAGEMENT_VIEW_FXML = "/org/borghisales/salessysten/ManagementView.fxml";
+
     static Alert alert;
     static ButtonType botonAceptar = new ButtonType("Aceptar");
-    static HashMap<String, String > map = new HashMap<>();
+    public static HashMap<String, String > map = new HashMap<>();
 
     void closeCurrentStage(TextField textField) {
         Stage stage = (Stage) textField.getScene().getWindow();
@@ -26,7 +29,7 @@ public class MenuController {
     }
 
 
-    void openNewStage(String fxmlFileName) {
+    public void openNewStage(String fxmlFileName) {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
@@ -37,7 +40,7 @@ public class MenuController {
             stage.setScene(scene);
             stage.show();
 
-            if (!fxmlFileName.equals("MainView.fxml"))
+            if (!fxmlFileName.equals(MAIN_VIEW_FXML))
                 stage.setOnCloseRequest(e->{
 
                     openNewStage(getFxmlFather(fxmlFileName));
@@ -72,4 +75,5 @@ public class MenuController {
         textField3.clear();
         textField4.clear();
     }
+
 }

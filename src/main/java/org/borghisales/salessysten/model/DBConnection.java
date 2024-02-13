@@ -1,12 +1,9 @@
 package org.borghisales.salessysten.model;
 
-import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
-import org.borghisales.salessysten.MenuController;
+import org.borghisales.salessysten.controllers.MenuController;
 
 import java.sql.*;
-import java.time.LocalDate;
 
 public class DBConnection {
 
