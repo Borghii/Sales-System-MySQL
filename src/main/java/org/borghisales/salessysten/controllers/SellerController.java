@@ -3,6 +3,7 @@ package org.borghisales.salessysten.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -22,5 +23,15 @@ public class SellerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cbState.setValue(Seller.State.ACTIVE);
         cbState.setItems(stateList);
+    }
+
+
+    public void updateSeller(ActionEvent actionEvent) {
+    }
+
+    public void deleteSeller(ActionEvent actionEvent) {
+    }
+
+    public void cleanCells(ActionEvent actionEvent) {
     }
 }

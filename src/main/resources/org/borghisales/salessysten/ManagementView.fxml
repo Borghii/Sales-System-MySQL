@@ -34,7 +34,7 @@
                      <children>
                         <Button layoutX="78.0" layoutY="46.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="160.0" text="CUSTOMER" />
                         <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="160.0" text="PRODUCT" />
-                        <Button layoutX="78.0" layoutY="264.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="160.0" text="SELLER" />
+                        <Button fx:id="sellerButton" layoutX="78.0" layoutY="264.0" mnemonicParsing="false" onAction="#openSeller" prefHeight="70.0" prefWidth="160.0" text="SELLER" />
                      </children>
                   </AnchorPane>
               </content>
