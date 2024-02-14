@@ -44,7 +44,7 @@
       <TextField fx:id="user" layoutX="120.0" layoutY="144.0" prefHeight="25.0" prefWidth="289.0" />
       <Button layoutX="458.0" layoutY="90.0" mnemonicParsing="false" onAction="#updateSeller" prefHeight="32.0" prefWidth="101.0" text="UPDATE" />
       <Button layoutX="458.0" layoutY="127.0" mnemonicParsing="false" onAction="#deleteSeller" prefHeight="32.0" prefWidth="101.0" text="DELETE" />
-      <Button layoutX="458.0" layoutY="166.0" mnemonicParsing="false" onAction="#cleanCells" prefHeight="32.0" prefWidth="101.0" text="CLEAN CELLS" />
+      <Button layoutX="458.0" layoutY="166.0" mnemonicParsing="false" onAction="#cleanCellsScreen" prefHeight="32.0" prefWidth="101.0" text="CLEAN CELLS" />
       <ComboBox fx:id="cbState" layoutX="121.0" layoutY="176.0" prefHeight="25.0" prefWidth="283.0" />
       <Label layoutX="51.0" layoutY="173.0" prefHeight="17.0" prefWidth="54.0" text="STATE:" underline="true">
          <font>

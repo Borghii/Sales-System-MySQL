@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import org.borghisales.salessysten.model.DBConnection;
+import org.borghisales.salessysten.model.SellerDAO;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +23,7 @@ public class MainController extends MenuController implements Initializable {
 
     @FXML
     private void signIn(){
-        if (DBConnection.login(user.getText(),password.getText())) {
+        if (SellerDAO.login(user.getText(),password.getText())) {
             closeCurrentStage(user);
             openNewStage(MANAGEMENT_VIEW_FXML);
         }

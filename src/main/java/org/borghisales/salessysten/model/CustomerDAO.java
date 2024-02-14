@@ -3,19 +3,20 @@ package org.borghisales.salessysten.model;
 import java.util.List;
 
 public class CustomerDAO implements CRUD<Customer> {
+
     @Override
-    public Customer create(Customer entity) {
-        return null;
+    public boolean create(Customer entity) {
+        return false;
     }
 
     @Override
-    public Customer read(int id) {
-        return null;
+    public boolean read(int id) {
+        return false;
     }
 
     @Override
-    public Customer update(Customer entity) {
-        return null;
+    public boolean update(Customer entity) {
+        return false;
     }
 
     @Override

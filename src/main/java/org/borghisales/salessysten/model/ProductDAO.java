@@ -4,19 +4,20 @@ import java.util.List;
 
 public class ProductDAO implements CRUD<Product>{
 
+
     @Override
-    public Product create(Product entity) {
-        return null;
+    public boolean create(Product entity) {
+        return false;
     }
 
     @Override
-    public Product read(int id) {
-        return null;
+    public boolean read(int id) {
+        return false;
     }
 
     @Override
-    public Product update(Product entity) {
-        return null;
+    public boolean update(Product entity) {
+        return false;
     }
 
     @Override

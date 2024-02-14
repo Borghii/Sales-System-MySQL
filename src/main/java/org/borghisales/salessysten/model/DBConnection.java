@@ -7,7 +7,7 @@ import java.sql.*;
 
 public class DBConnection {
 
-    private static Connection connection() throws SQLException{
+    static Connection connection() throws SQLException{
         String url = "jdbc:mysql://salesdb.mysql.database.azure.com:3306/salesystem";
         String user = "Borghi";
         String password = "Qwertyuiop1$";
@@ -33,36 +33,7 @@ public class DBConnection {
 
     }
 
-    public static boolean login(String dni,String user){
 
-        if (dni ==null || user ==null || dni.isEmpty()||user.isEmpty() ){
-            MenuController.setAlert(Alert.AlertType.ERROR,"User or passsword empty");
-            return false;
-        }
-
-
-        String query = "SELECT * from seller where dni = ? and user = ?";
-
-        try (Connection conn = connection();
-             PreparedStatement pstmt = conn.prepareStatement(query)  ){
-
-            pstmt.setString(1,dni);
-            pstmt.setString(2,user);
-
-            try (ResultSet rs = pstmt.executeQuery()){
-                if (rs.next())
-                    return true;
-                else  {
-                    MenuController.setAlert(Alert.AlertType.ERROR, "user not found") ;
-                    return false;
-                }
-            }
-        }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching seller: " + e.getMessage());
-            return false;
-        }
-
-    }
 
 //    public static boolean addEmployee(Employee employee) {
 //        String query = "INSERT INTO employee_data (NAME , SURNAME, HIRE_DATE,STATE) VALUES (?, ?, ?,?)";
