@@ -17,7 +17,7 @@ public class MainController extends MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        user.setText("44994806");
+        user.setText("44994807");
         password.setText("chimu");
     }
 

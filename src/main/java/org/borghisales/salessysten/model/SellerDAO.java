@@ -48,7 +48,33 @@ public class SellerDAO implements CRUD<Seller> {
 
     @Override
     public boolean update(Seller entity) {
-        return false;
+        String sql = "UPDATE seller set name=?,phone_number=?,state=?,user=? where dni=?";
+
+        try(Connection conn = DBConnection.connection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+
+            pstmt.setString(1, entity.name());
+            pstmt.setString(2, entity.phoneNumber());
+            pstmt.setString(3, entity.state().name());
+            pstmt.setString(4, entity.user());
+            pstmt.setString(5, entity.dni());
+
+            int rows_affected = pstmt.executeUpdate();
+
+            if (rows_affected>0){
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller updated correctly");
+                return true;
+            }else{
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding seller: ");
+                return false;
+            }
+
+        }catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller: " + e.getMessage());
+            return false;
+        }
+
     }
 
     @Override

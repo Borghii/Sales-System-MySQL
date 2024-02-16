@@ -45,6 +45,9 @@ public class SellerController implements Initializable {
 
     }
     public void updateSeller(ActionEvent actionEvent) {
+        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
+        if (sellerDAO.update(seller))
+            MenuController.cleanCells(dni,name,phone,user);
     }
 
     public void deleteSeller(ActionEvent actionEvent) {
