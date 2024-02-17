@@ -20,7 +20,7 @@ public class CustomerDAO implements CRUD<Customer> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(String id) {
         return false;
     }
 

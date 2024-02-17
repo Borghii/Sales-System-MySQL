@@ -21,9 +21,10 @@ public class ProductDAO implements CRUD<Product>{
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(String id) {
         return false;
     }
+
 
     @Override
     public List<Product> getAll() {

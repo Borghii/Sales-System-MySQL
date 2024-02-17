@@ -6,7 +6,7 @@ public interface CRUD<T> {
     boolean create(T entity);
     boolean read(int id);
     boolean update(T entity);
-    boolean delete(int id);
+    boolean delete(String id);
     List<T> getAll();
 }
 

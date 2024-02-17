@@ -51,8 +51,11 @@ public class SellerController implements Initializable {
     }
 
     public void deleteSeller(ActionEvent actionEvent) {
+        if (sellerDAO.delete(dni.getText()))
+            MenuController.cleanCells(dni,name,phone,user);
     }
 
     public void cleanCellsScreen(ActionEvent actionEvent) {
+        MenuController.cleanCells(dni,name,phone,user);
     }
 }

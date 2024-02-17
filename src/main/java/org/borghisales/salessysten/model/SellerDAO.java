@@ -78,8 +78,33 @@ public class SellerDAO implements CRUD<Seller> {
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
+    public boolean delete(String id) {
+
+        String sql = "DELETE FROM seller where dni=?";
+
+        try(Connection conn = DBConnection.connection();
+            PreparedStatement pstmt = conn.prepareStatement(sql))    {
+
+
+            pstmt.setString(1,id);
+
+            int rows_affected = pstmt.executeUpdate();
+
+            if (rows_affected>0){
+                MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller deleted correctly");
+                return true;
+            }else{
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: ");
+                return false;
+            }
+
+
+
+        }catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller: " + e.getMessage());
+            return false;
+        }
+
     }
 
     @Override
