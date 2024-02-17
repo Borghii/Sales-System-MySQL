@@ -12,10 +12,13 @@
 <AnchorPane prefHeight="474.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.SellerController">
    <children>
       <Button layoutX="458.0" layoutY="52.0" mnemonicParsing="false" onAction="#addSeller" prefHeight="32.0" prefWidth="101.0" text="ADD" />
-      <TableView layoutX="26.0" layoutY="228.0" prefHeight="221.0" prefWidth="602.0">
+      <TableView fx:id="tableSellers" layoutX="26.0" layoutY="228.0" prefHeight="221.0" prefWidth="602.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="colId" prefWidth="120.0" text="idSeller" />
+          <TableColumn fx:id="colDni" prefWidth="111.0" text="dni" />
+            <TableColumn fx:id="colName" prefWidth="124.0" text="name" />
+            <TableColumn fx:id="colPhone" prefWidth="124.0" text="phone" />
+            <TableColumn fx:id="colState" prefWidth="122.0" text="state" />
         </columns>
       </TableView>
       <Label layoutX="51.0" layoutY="62.0" prefHeight="17.0" prefWidth="54.0" text="DNI:" underline="true">

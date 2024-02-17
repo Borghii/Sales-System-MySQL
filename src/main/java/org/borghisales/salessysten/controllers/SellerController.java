@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.borghisales.salessysten.model.Seller;
 import org.borghisales.salessysten.model.SellerDAO;
@@ -30,13 +32,28 @@ public class SellerController implements Initializable {
     @FXML
     ComboBox cbState;
 
+    @FXML
+    TableView<Seller> tableSellers;
+    @FXML
+    TableColumn colId;
+    @FXML
+    TableColumn colDni;
+    @FXML
+    TableColumn colName;
+    @FXML
+    TableColumn colPhone;
+    @FXML
+    TableColumn colState;
+
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cbState.setValue(Seller.State.ACTIVE);
         cbState.setItems(stateList);
     }
-
-
 
     public void addSeller(ActionEvent actionEvent){
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
