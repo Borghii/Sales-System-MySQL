@@ -1,5 +1,7 @@
 package org.borghisales.salessysten.model;
 
+import javafx.collections.ObservableList;
+
 import java.util.List;
 
 public interface CRUD<T> {
@@ -7,6 +9,6 @@ public interface CRUD<T> {
     boolean read(int id);
     boolean update(T entity);
     boolean delete(String id);
-    List<T> getAll();
+    void setTable(ObservableList<T> table);
 }
 

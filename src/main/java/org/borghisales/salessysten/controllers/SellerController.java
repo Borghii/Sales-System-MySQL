@@ -1,6 +1,10 @@
 package org.borghisales.salessysten.controllers;
 
 
+import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.borghisales.salessysten.model.Seller;
 import org.borghisales.salessysten.model.SellerDAO;
 
@@ -19,7 +24,7 @@ import java.util.ResourceBundle;
 public class SellerController implements Initializable {
     SellerDAO sellerDAO = new SellerDAO();
     ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
-
+    private ObservableList<Seller> sellers;
 
     @FXML
     TextField dni;
@@ -35,17 +40,15 @@ public class SellerController implements Initializable {
     @FXML
     TableView<Seller> tableSellers;
     @FXML
-    TableColumn colId;
+    TableColumn<Seller,Integer> colId;
     @FXML
-    TableColumn colDni;
+    TableColumn<Seller,String> colDni;
     @FXML
-    TableColumn colName;
+    TableColumn<Seller,String> colName;
     @FXML
-    TableColumn colPhone;
+    TableColumn<Seller,String> colPhone;
     @FXML
-    TableColumn colState;
-
-
+    TableColumn<Seller, Seller.State> colState;
 
 
 
@@ -53,6 +56,19 @@ public class SellerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cbState.setValue(Seller.State.ACTIVE);
         cbState.setItems(stateList);
+
+        sellers = FXCollections.observableArrayList();
+
+        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSeller()).asObject());
+        colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().dni()));
+        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
+        colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().phoneNumber()));
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<Seller.State>(p.getValue().state()));
+
+        sellerDAO.setTable(sellers);
+
+        tableSellers.setItems(sellers);
+
     }
 
     public void addSeller(ActionEvent actionEvent){

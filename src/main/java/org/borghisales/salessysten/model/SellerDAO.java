@@ -1,5 +1,6 @@
 package org.borghisales.salessysten.model;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MenuController;
 
@@ -108,8 +109,26 @@ public class SellerDAO implements CRUD<Seller> {
     }
 
     @Override
-    public List<Seller> getAll() {
-        return null;
+    public void setTable(ObservableList<Seller> sellers){
+        String sql = "SELECT * FROM seller";
+
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            try (ResultSet rs = pstmt.executeQuery()){
+
+                while (rs.next()){
+                    Seller seller = new Seller(rs.getInt("idSeller"),rs.getString("dni"),
+                                    rs.getString("name"), rs.getString("phone_number"),
+                                    Seller.State.valueOf(rs.getString("state")));
+
+                    sellers.add(seller);
+                }
+
+            }
+        }catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error setting the table seller: " + e.getMessage());
+        }
     }
 
 
