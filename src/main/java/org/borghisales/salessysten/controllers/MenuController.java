@@ -66,15 +66,10 @@ public class MenuController {
         alert.showAndWait();
     }
 
-    static public void cleanCells(TextField textField1, TextField textField2){
-        textField1.clear();
-        textField2.clear();
+    static public void cleanCells(TextField...cells){
+        for (TextField e:cells)
+            e.clear();
     }
-    static public void cleanCells(TextField textField1, TextField textField2, TextField textField3, TextField textField4){
-        textField1.clear();
-        textField2.clear();
-        textField3.clear();
-        textField4.clear();
-    }
+
 
 }

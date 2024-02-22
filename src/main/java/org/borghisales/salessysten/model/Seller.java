@@ -9,8 +9,5 @@ public record Seller(int idSeller, String dni, String name, String phoneNumber, 
     public Seller(int idSeller, String dni, String name, String phoneNumber, State state) {
         this(idSeller, dni, name, phoneNumber, state, null);
     }
-
-
-
 }
 

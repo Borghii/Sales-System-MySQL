@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="407.0" prefWidth="305.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ManagementController">
    <children>
-      <TabPane prefHeight="400.0" prefWidth="315.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPaneManage" prefHeight="400.0" prefWidth="315.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="MENU">
             <content>

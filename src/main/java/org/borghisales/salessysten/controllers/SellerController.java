@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -52,43 +53,76 @@ public class SellerController implements Initializable {
 
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cbState.setValue(Seller.State.ACTIVE);
-        cbState.setItems(stateList);
 
-        sellers = FXCollections.observableArrayList();
+        //Capturar el evento de click en fila
+        tableSellers.setOnMouseClicked(mouseEvent -> {
+            if (!tableSellers.getSelectionModel().isEmpty() && mouseEvent.getClickCount()==2){
+                Seller seller = tableSellers.getSelectionModel().getSelectedItem();
+                setCells(seller);
+            }
+        });
 
-        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSeller()).asObject());
-        colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().dni()));
-        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
-        colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().phoneNumber()));
-        colState.setCellValueFactory(p -> new SimpleObjectProperty<Seller.State>(p.getValue().state()));
+        Thread initializationThread = new Thread(() -> {
+            cbState.setValue(Seller.State.ACTIVE);
+            cbState.setItems(stateList);
 
-        sellerDAO.setTable(sellers);
+            sellers = FXCollections.observableArrayList();
 
-        tableSellers.setItems(sellers);
+            colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSeller()).asObject());
+            colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().dni()));
+            colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
+            colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().phoneNumber()));
+            colState.setCellValueFactory(p -> new SimpleObjectProperty<Seller.State>(p.getValue().state()));
+
+            tableSellers.getItems().clear();
+            sellerDAO.setTable(sellers);
+            tableSellers.setItems(sellers);
+        });
+        initializationThread.start();
 
     }
 
     public void addSeller(ActionEvent actionEvent){
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
-        if (sellerDAO.create(seller))
-            MenuController.cleanCells(dni,name,phone,user);
-
+        if (sellerDAO.create(seller)) {
+            MenuController.cleanCells(dni, name, phone, user);
+            updateTable();
+        }
     }
     public void updateSeller(ActionEvent actionEvent) {
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
-        if (sellerDAO.update(seller))
-            MenuController.cleanCells(dni,name,phone,user);
+        if (sellerDAO.update(seller)) {
+            MenuController.cleanCells(dni, name, phone, user);
+            updateTable();
+        }
     }
 
     public void deleteSeller(ActionEvent actionEvent) {
-        if (sellerDAO.delete(dni.getText()))
+        if (sellerDAO.delete(dni.getText())){
             MenuController.cleanCells(dni,name,phone,user);
+            updateTable();
+        }
+
     }
 
     public void cleanCellsScreen(ActionEvent actionEvent) {
         MenuController.cleanCells(dni,name,phone,user);
+    }
+
+    private void setCells(Seller seller){
+        dni.setText(seller.dni());
+        name.setText(seller.name());
+        phone.setText(seller.phoneNumber());
+        user.setText(seller.user());
+        cbState.setValue(seller.state());
+    }
+
+    private void updateTable(){
+        tableSellers.getItems().clear();
+        sellerDAO.setTable(sellers);
+        tableSellers.setItems(sellers);
     }
 }

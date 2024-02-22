@@ -67,7 +67,7 @@ public class SellerDAO implements CRUD<Seller> {
                 MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Seller updated correctly");
                 return true;
             }else{
-                MenuController.setAlert(Alert.AlertType.ERROR, "Error adding seller: ");
+                MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller ");
                 return false;
             }
 
@@ -102,7 +102,7 @@ public class SellerDAO implements CRUD<Seller> {
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error updating seller: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting seller: " + e.getMessage());
             return false;
         }
 
