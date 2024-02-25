@@ -32,8 +32,8 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="78.0" layoutY="46.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="160.0" text="CUSTOMER" />
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="160.0" text="PRODUCT" />
+                        <Button layoutX="78.0" layoutY="46.0" mnemonicParsing="false" onAction="#openCustomer" prefHeight="70.0" prefWidth="160.0" text="CUSTOMER" />
+                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openProduct" prefHeight="70.0" prefWidth="160.0" text="PRODUCT" />
                         <Button fx:id="sellerButton" layoutX="78.0" layoutY="264.0" mnemonicParsing="false" onAction="#openSeller" prefHeight="70.0" prefWidth="160.0" text="SELLER" />
                      </children>
                   </AnchorPane>

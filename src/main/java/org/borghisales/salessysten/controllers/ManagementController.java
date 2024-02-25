@@ -25,11 +25,22 @@ public class ManagementController extends MenuController implements Initializabl
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
         closeCurrentStage(sellerButton);
         openNewStage(SELLER_VIEW_FXML);
-
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabPaneManage.getSelectionModel().select(lastTab);
+    }
+
+    public void openCustomer(ActionEvent actionEvent) {
+
+    }
+
+    public void openProduct(ActionEvent actionEvent) {
+        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+        closeCurrentStage(sellerButton);
+        openNewStage(PRODUCT_VIEW_FXML);
+
     }
 }

@@ -1,6 +1,7 @@
 package org.borghisales.salessysten.controllers;
 
 
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -36,7 +37,7 @@ public class SellerController implements Initializable {
     @FXML
     TextField user;
     @FXML
-    ComboBox cbState;
+    ComboBox<Seller.State> cbState;
 
     @FXML
     TableView<Seller> tableSellers;
@@ -65,7 +66,7 @@ public class SellerController implements Initializable {
             }
         });
 
-        Thread initializationThread = new Thread(() -> {
+        Platform.runLater(() -> {
             cbState.setValue(Seller.State.ACTIVE);
             cbState.setItems(stateList);
 
@@ -81,12 +82,10 @@ public class SellerController implements Initializable {
             sellerDAO.setTable(sellers);
             tableSellers.setItems(sellers);
         });
-        initializationThread.start();
-
     }
 
     public void addSeller(ActionEvent actionEvent){
-        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(),(Seller.State) cbState.getValue(),user.getText());
+        Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());
         if (sellerDAO.create(seller)) {
             MenuController.cleanCells(dni, name, phone, user);
             updateTable();
@@ -105,7 +104,6 @@ public class SellerController implements Initializable {
             MenuController.cleanCells(dni,name,phone,user);
             updateTable();
         }
-
     }
 
     public void cleanCellsScreen(ActionEvent actionEvent) {
