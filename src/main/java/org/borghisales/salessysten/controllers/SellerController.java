@@ -58,6 +58,7 @@ public class SellerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
         //Capturar el evento de click en fila
         tableSellers.setOnMouseClicked(mouseEvent -> {
             if (!tableSellers.getSelectionModel().isEmpty() && mouseEvent.getClickCount()==2){

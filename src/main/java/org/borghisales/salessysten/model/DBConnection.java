@@ -3,15 +3,27 @@ package org.borghisales.salessysten.model;
 import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MenuController;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
+import java.util.Properties;
 
 public class DBConnection {
 
-    static Connection connection() throws SQLException{
-        String url = "jdbc:mysql://salesdb.mysql.database.azure.com:3306/salesystem";
-        String user = "Borghi";
-        String password = "Qwertyuiop1$";
-        return DriverManager.getConnection(url,user,password);
+    static Connection connection() throws SQLException {
+        Properties properties = new Properties();
+        try (InputStream input = new FileInputStream("src/main/java/org/borghisales/salessysten/model/config.properties")) {
+            properties.load(input);
+            String url = properties.getProperty("db.url");
+            String user = properties.getProperty("db.user");
+            String password = properties.getProperty("db.password");
+            return DriverManager.getConnection(url, user, password);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejar la excepción adecuadamente
+            return null;
+        }
     }
 
     private static boolean verifyDuplicates(String name, String surname){
