@@ -34,6 +34,9 @@ public class ManagementController extends MenuController implements Initializabl
     }
 
     public void openCustomer(ActionEvent actionEvent) {
+        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+        closeCurrentStage(sellerButton);
+        openNewStage(CUSTOMER_VIEW_FXML);
 
     }
 
