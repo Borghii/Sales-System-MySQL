@@ -15,10 +15,10 @@ public class ManagementController extends MenuController implements Initializabl
     private static int lastTab ;
 
     @FXML
-    Button sellerButton;
+    private Button sellerButton;
 
     @FXML
-    TabPane tabPaneManage;
+    private TabPane tabPaneManage;
 
     @FXML
     void openSeller(){
@@ -45,5 +45,11 @@ public class ManagementController extends MenuController implements Initializabl
         closeCurrentStage(sellerButton);
         openNewStage(PRODUCT_VIEW_FXML);
 
+    }
+
+    public void openGenerateSale(ActionEvent actionEvent) {
+        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+        closeCurrentStage(sellerButton);
+        openNewStage(GENERATESALE_VIEW_FXML);
     }
 }

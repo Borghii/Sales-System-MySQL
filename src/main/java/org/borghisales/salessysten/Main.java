@@ -17,8 +17,7 @@ public class Main extends Application {
         map.put(SELLER_VIEW_FXML, MANAGEMENT_VIEW_FXML);
         map.put(PRODUCT_VIEW_FXML, MANAGEMENT_VIEW_FXML);
         map.put(CUSTOMER_VIEW_FXML, MANAGEMENT_VIEW_FXML);
-
-
+        map.put(GENERATESALE_VIEW_FXML, MANAGEMENT_VIEW_FXML);
     }
 
     @Override

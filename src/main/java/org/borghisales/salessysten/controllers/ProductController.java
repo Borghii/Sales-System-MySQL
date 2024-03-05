@@ -23,33 +23,33 @@ import java.util.ResourceBundle;
 
 public class ProductController implements Initializable {
 
-    ProductDAO productDAO = new ProductDAO();
+    private final ProductDAO productDAO = new ProductDAO();
 
-    ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
+    private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
 
     private ObservableList<Product> products;
     @FXML
-    public ComboBox<Product.State> cbState;
+    private ComboBox<Product.State> cbState;
 
     @FXML
-    public TextField name;
+    private TextField name;
     @FXML
-    public TextField price;
+    private TextField price;
     @FXML
-    public TextField stock;
+    private TextField stock;
 
     @FXML
-    public TableView<Product> tableProducts;
+    private TableView<Product> tableProducts;
     @FXML
-    public TableColumn<Product,Integer> colId;
+    private TableColumn<Product,Integer> colId;
     @FXML
-    public TableColumn<Product,String> colName;
+    private TableColumn<Product,String> colName;
     @FXML
-    public TableColumn<Product,Double> colPrice;
+    private TableColumn<Product,Double> colPrice;
     @FXML
-    public TableColumn<Product,Integer> colStock;
+    private TableColumn<Product,Integer> colStock;
     @FXML
-    public TableColumn<Product,Product.State> colState;
+    private TableColumn<Product,Product.State> colState;
 
 
     @Override

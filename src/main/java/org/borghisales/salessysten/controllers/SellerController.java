@@ -24,33 +24,33 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SellerController implements Initializable {
-    SellerDAO sellerDAO = new SellerDAO();
-    ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
+    private final SellerDAO sellerDAO = new SellerDAO();
+    private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
     private ObservableList<Seller> sellers;
 
     @FXML
-    TextField dni;
+    private TextField dni;
     @FXML
-    TextField name;
+    private TextField name;
     @FXML
-    TextField phone;
+    private TextField phone;
     @FXML
-    TextField user;
+    private TextField user;
     @FXML
-    ComboBox<Seller.State> cbState;
+    private ComboBox<Seller.State> cbState;
 
     @FXML
-    TableView<Seller> tableSellers;
+    private TableView<Seller> tableSellers;
     @FXML
-    TableColumn<Seller,Integer> colId;
+    private TableColumn<Seller,Integer> colId;
     @FXML
-    TableColumn<Seller,String> colDni;
+    private TableColumn<Seller,String> colDni;
     @FXML
-    TableColumn<Seller,String> colName;
+    private TableColumn<Seller,String> colName;
     @FXML
-    TableColumn<Seller,String> colPhone;
+    private TableColumn<Seller,String> colPhone;
     @FXML
-    TableColumn<Seller, Seller.State> colState;
+    private TableColumn<Seller, Seller.State> colState;
 
 
 

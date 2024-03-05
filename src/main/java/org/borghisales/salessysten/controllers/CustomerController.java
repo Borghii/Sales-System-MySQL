@@ -22,32 +22,32 @@ import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {
 
-    CustomerDAO customerDAO = new CustomerDAO();
+    private final CustomerDAO customerDAO = new CustomerDAO();
 
-    ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
+    private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
 
     private ObservableList<Customer> customers;
 
     @FXML
-    public TextField dni;
+    private TextField dni;
     @FXML
-    public TextField name;
+    private TextField name;
     @FXML
-    public TextField address;
+    private TextField address;
     @FXML
-    public ComboBox<Customer.State> cbState;
+    private ComboBox<Customer.State> cbState;
     @FXML
-    public TableView<Customer> tableCustomers;
+    private TableView<Customer> tableCustomers;
     @FXML
-    public TableColumn<Customer,Integer> colId;
+    private TableColumn<Customer,Integer> colId;
     @FXML
-    public TableColumn<Customer,String> colDni;
+    private TableColumn<Customer,String> colDni;
     @FXML
-    public TableColumn<Customer,String> colName;
+    private TableColumn<Customer,String> colName;
     @FXML
-    public TableColumn<Customer,String> colAdress;
+    private TableColumn<Customer,String> colAdress;
     @FXML
-    public TableColumn<Customer,Customer.State> colState;
+    private TableColumn<Customer,Customer.State> colState;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

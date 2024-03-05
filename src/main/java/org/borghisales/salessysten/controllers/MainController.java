@@ -11,9 +11,9 @@ import java.util.ResourceBundle;
 
 public class MainController extends MenuController implements Initializable {
     @FXML
-    TextField user;
+    private TextField user;
     @FXML
-    TextField password;
+    private TextField password;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
