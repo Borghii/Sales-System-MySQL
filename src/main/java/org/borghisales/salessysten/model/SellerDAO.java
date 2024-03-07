@@ -118,10 +118,7 @@ public class SellerDAO implements CRUD<Seller> {
             try (ResultSet rs = pstmt.executeQuery()){
 
                 while (rs.next()){
-                    Seller seller = new Seller(rs.getInt("idSeller"),rs.getString("dni"),
-                                    rs.getString("name"), rs.getString("phone_number"),
-                                    Seller.State.valueOf(rs.getString("state")), rs.getString("user"));
-
+                    Seller seller = Seller.fromResultSet(rs);
                     sellers.add(seller);
                 }
 

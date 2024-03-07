@@ -10,6 +10,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CustomerDAO implements CRUD<Customer> {
+
+    public Customer searchCustomer(int dni){
+        String sql = "SELECT * FROM customer WHERE dni=?";
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setInt(1,dni);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                rs.next();
+                return Customer.fromResultSet(rs);
+            }
+
+        }catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching customer: " + e.getMessage());
+            return null;
+        }
+
+    }
     @Override
     public boolean create(Customer entity) {
         String sql = "Insert into customer (dni,name,address,state) values(?,?,?,?)";
@@ -114,10 +133,7 @@ public class CustomerDAO implements CRUD<Customer> {
             try (ResultSet rs = pstmt.executeQuery()){
 
                 while (rs.next()){
-                    Customer customer = new Customer(rs.getInt("idCustomer"),rs.getString("dni"),
-                            rs.getString("name"), rs.getString("address"),
-                            Customer.State.valueOf(rs.getString("state")));
-
+                    Customer customer = Customer.fromResultSet(rs);
                     customers.add(customer);
                 }
 

@@ -114,10 +114,7 @@ public class ProductDAO implements CRUD<Product>{
             try (ResultSet rs = pstmt.executeQuery()){
 
                 while (rs.next()){
-                    Product product = new Product(rs.getInt("idProduct"),rs.getString("name"),
-                            rs.getDouble("price"), rs.getInt("stock"),
-                            Product.State.valueOf(rs.getString("state")));
-
+                    Product product = Product.fromResultSet(rs);
                     products.add(product);
                 }
 

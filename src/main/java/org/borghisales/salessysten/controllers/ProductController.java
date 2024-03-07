@@ -62,6 +62,7 @@ public class ProductController implements Initializable {
             }
         });
 
+
         Platform.runLater(() -> {
             cbState.setValue(Product.State.ACTIVE);
             cbState.setItems(stateList);
@@ -78,6 +79,7 @@ public class ProductController implements Initializable {
             productDAO.setTable(products);
             tableProducts.setItems(products);
         });
+
     }
 
     public void addProduct(ActionEvent actionEvent) {
