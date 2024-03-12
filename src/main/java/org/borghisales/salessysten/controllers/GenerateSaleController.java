@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 public class GenerateSaleController implements Initializable {
 
     private final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    private final ButtonType buttonTypeAceptar = new ButtonType("Aceptar");
+    private final ButtonType buttonTypeAceptar = new ButtonType("Aceptarr");
     private final ButtonType buttonTypeCancelar = new ButtonType("Cancelar");
 
 
