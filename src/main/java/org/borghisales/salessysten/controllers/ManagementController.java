@@ -21,10 +21,11 @@ public class ManagementController extends MenuController implements Initializabl
     private TabPane tabPaneManage;
 
     @FXML
-    void openSeller(){
+    void openSeller() throws InterruptedException {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        closeCurrentStage(sellerButton);
+
         openNewStage(SELLER_VIEW_FXML);
+        closeCurrentStage(sellerButton);
     }
 
 
@@ -35,21 +36,25 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void openCustomer(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        closeCurrentStage(sellerButton);
+
         openNewStage(CUSTOMER_VIEW_FXML);
+        closeCurrentStage(sellerButton);
 
     }
 
     public void openProduct(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        closeCurrentStage(sellerButton);
+
         openNewStage(PRODUCT_VIEW_FXML);
+        closeCurrentStage(sellerButton);
 
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        closeCurrentStage(sellerButton);
+
         openNewStage(GENERATESALE_VIEW_FXML);
+        closeCurrentStage(sellerButton);
+
     }
 }

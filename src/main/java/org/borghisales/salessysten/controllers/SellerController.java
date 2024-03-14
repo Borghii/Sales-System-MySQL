@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 public class SellerController implements Initializable {
     private final SellerDAO sellerDAO = new SellerDAO();
     private final ObservableList<Seller.State> stateList = FXCollections.observableArrayList(Seller.State.ACTIVE, Seller.State.DISACTIVE);
-    private ObservableList<Seller> sellers;
+    private static ObservableList<Seller> sellers = null;
 
     @FXML
     private TextField dni;
@@ -66,23 +66,23 @@ public class SellerController implements Initializable {
                 setCells(seller);
             }
         });
+        cbState.setValue(Seller.State.ACTIVE);
+        cbState.setItems(stateList);
 
-        Platform.runLater(() -> {
-            cbState.setValue(Seller.State.ACTIVE);
-            cbState.setItems(stateList);
+        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSeller()).asObject());
+        colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().dni()));
+        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
+        colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().phoneNumber()));
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<Seller.State>(p.getValue().state()));
 
+        tableSellers.getItems().clear();
+
+        if (sellers == null){
             sellers = FXCollections.observableArrayList();
-
-            colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSeller()).asObject());
-            colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().dni()));
-            colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
-            colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().phoneNumber()));
-            colState.setCellValueFactory(p -> new SimpleObjectProperty<Seller.State>(p.getValue().state()));
-
-            tableSellers.getItems().clear();
             sellerDAO.setTable(sellers);
-            tableSellers.setItems(sellers);
-        });
+        }
+        tableSellers.setItems(sellers);
+
     }
 
     public void addSeller(ActionEvent actionEvent){

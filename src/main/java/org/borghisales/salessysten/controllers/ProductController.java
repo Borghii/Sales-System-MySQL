@@ -27,7 +27,7 @@ public class ProductController implements Initializable {
 
     private final ObservableList<Product.State> stateList = FXCollections.observableArrayList(Product.State.ACTIVE, Product.State.DISACTIVE);
 
-    private ObservableList<Product> products;
+    private static ObservableList<Product> products =null;
     @FXML
     private ComboBox<Product.State> cbState;
 
@@ -63,22 +63,27 @@ public class ProductController implements Initializable {
         });
 
 
-        Platform.runLater(() -> {
-            cbState.setValue(Product.State.ACTIVE);
-            cbState.setItems(stateList);
 
+        cbState.setValue(Product.State.ACTIVE);
+        cbState.setItems(stateList);
+
+
+
+        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idProduct()).asObject());
+        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
+        colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
+        colStock.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().stock()).asObject());
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<Product.State>(p.getValue().state()));
+
+        tableProducts.getItems().clear();
+
+        if (products == null){
             products = FXCollections.observableArrayList();
-
-            colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idProduct()).asObject());
-            colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
-            colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
-            colStock.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().stock()).asObject());
-            colState.setCellValueFactory(p -> new SimpleObjectProperty<Product.State>(p.getValue().state()));
-
-            tableProducts.getItems().clear();
             productDAO.setTable(products);
-            tableProducts.setItems(products);
-        });
+        }
+
+        tableProducts.setItems(products);
+
 
     }
 

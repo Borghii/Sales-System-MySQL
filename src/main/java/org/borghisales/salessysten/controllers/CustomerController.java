@@ -26,7 +26,7 @@ public class CustomerController implements Initializable {
 
     private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
 
-    private ObservableList<Customer> customers;
+    private static ObservableList<Customer> customers=null;
 
     @FXML
     private TextField dni;
@@ -58,22 +58,25 @@ public class CustomerController implements Initializable {
             }
         });
 
-        Platform.runLater(() -> {
-            cbState.setValue(Customer.State.ACTIVE);
-            cbState.setItems(stateList);
 
+        cbState.setValue(Customer.State.ACTIVE);
+        cbState.setItems(stateList);
+
+        colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idCustomer()).asObject());
+        colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
+        colDni.setCellValueFactory(p-> new SimpleStringProperty(p.getValue().dni()));
+        colAdress.setCellValueFactory(p-> new SimpleStringProperty(p.getValue().address()));
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<Customer.State>(p.getValue().state()));
+
+        tableCustomers.getItems().clear();
+
+        if (customers==null){
             customers = FXCollections.observableArrayList();
-
-            colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idCustomer()).asObject());
-            colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
-            colDni.setCellValueFactory(p-> new SimpleStringProperty(p.getValue().dni()));
-            colAdress.setCellValueFactory(p-> new SimpleStringProperty(p.getValue().address()));
-            colState.setCellValueFactory(p -> new SimpleObjectProperty<Customer.State>(p.getValue().state()));
-
-            tableCustomers.getItems().clear();
             customerDAO.setTable(customers);
-            tableCustomers.setItems(customers);
-        });
+        }
+
+        tableCustomers.setItems(customers);
+
 
     }
     @FXML
