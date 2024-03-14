@@ -11,6 +11,28 @@ import java.sql.SQLException;
 
 public class ProductDAO implements CRUD<Product>{
 
+    public Product searchProduct(int idProduct){
+        String sql = "SELECT * FROM product WHERE idProduct = ?";
+
+        try(Connection conn = DBConnection.connection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1,idProduct);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                rs.next();
+                Product product = Product.fromResultSet(rs);
+            }
+
+        }catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching product: " + e.getMessage());
+            return null;
+        }
+
+
+        return null;
+    }
+
     @Override
     public boolean create(Product entity) {
         String sql = "INSERT INTO product (name,price,stock,state) values (?,?,?,?)";

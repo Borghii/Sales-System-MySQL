@@ -46,7 +46,6 @@ public class MenuController {
 
             if (!fxmlFileName.equals(MAIN_VIEW_FXML))
                 stage.setOnCloseRequest(e->{
-
                     openNewStage(getFxmlFather(fxmlFileName));
                 });
 

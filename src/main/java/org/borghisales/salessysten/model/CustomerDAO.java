@@ -69,14 +69,10 @@ public class CustomerDAO implements CRUD<Customer> {
         try(Connection conn = DBConnection.connection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-
-
             pstmt.setString(1, entity.name());
             pstmt.setString(2, entity.address());
             pstmt.setString(3, entity.state().name());
             pstmt.setString(4, entity.dni());
-
-
 
 
             int rows_affected = pstmt.executeUpdate();
