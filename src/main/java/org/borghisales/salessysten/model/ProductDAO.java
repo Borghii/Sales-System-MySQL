@@ -21,16 +21,13 @@ public class ProductDAO implements CRUD<Product>{
 
             try (ResultSet rs = pstmt.executeQuery()){
                 rs.next();
-                Product product = Product.fromResultSet(rs);
+                return Product.fromResultSet(rs);
             }
 
         }catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error searching product: " + e.getMessage());
             return null;
         }
-
-
-        return null;
     }
 
     @Override

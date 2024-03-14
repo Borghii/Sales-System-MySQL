@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.borghisales.salessysten.model.Customer;
 import org.borghisales.salessysten.model.CustomerDAO;
+import org.borghisales.salessysten.model.Product;
+import org.borghisales.salessysten.model.ProductDAO;
 
 
 import java.io.IOException;
@@ -18,22 +20,26 @@ public class GenerateSaleController extends MenuController implements Initializa
 
 
     private final FXMLLoader fxmlLoaderCustomer = new FXMLLoader(MenuController.class.getResource(CUSTOMER_VIEW_FXML));
+    private final FXMLLoader fxmlLoaderProduct = new FXMLLoader(MenuController.class.getResource(PRODUCT_VIEW_FXML));
+
     private Scene scene = null;
     private Stage stage;
 
-    private final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    private final ButtonType buttonTypeAceptar = new ButtonType("Aceptarr");
-    private final ButtonType buttonTypeCancelar = new ButtonType("Cancelar");
+    private final Alert alertCustomer = new Alert(Alert.AlertType.WARNING);
+    private final Alert alertProduct = new Alert(Alert.AlertType.WARNING);
+    private final ButtonType buttonTypeAccept = new ButtonType("YES");
+    private final ButtonType buttonTypeCancel = new ButtonType("NO");
 
 
-    CustomerDAO customerDAO = new CustomerDAO();
+    private final CustomerDAO customerDAO = new CustomerDAO();
+    private final ProductDAO productDAO = new ProductDAO();
 
     public TextField serial;
     public TextField codCustomer;
     public TextField codProduct;
     public TextField price;
     public TextField customerName;
-    public TextField product;
+    public TextField productName;
     public TextField stock;
     public TextField sell;
 
@@ -51,10 +57,15 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        alert.setTitle("New customer");
-        alert.setHeaderText("The customer doesn´t exist");
-        alert.setContentText("Do you want to add it?");
-        alert.getButtonTypes().setAll(buttonTypeAceptar, buttonTypeCancelar);
+        alertCustomer.setTitle("New customer");
+        alertCustomer.setHeaderText("The customer doesn´t exist");
+        alertCustomer.setContentText("Do you want to add it?");
+        alertCustomer.getButtonTypes().setAll(buttonTypeAccept, buttonTypeCancel);
+
+        alertProduct.setTitle("New Product");
+        alertProduct.setHeaderText("The product doesn´t exist");
+        alertProduct.setContentText("Do you want to add it?");
+        alertProduct.getButtonTypes().setAll(buttonTypeAccept, buttonTypeCancel);
 
 
     }
@@ -66,15 +77,15 @@ public class GenerateSaleController extends MenuController implements Initializa
             setAlert(Alert.AlertType.CONFIRMATION,"Customer found: "+customer.name());
             customerName.setText(customer.name());
         }else{
-            alert.showAndWait().ifPresent(buttonType -> {
-                if(buttonType == buttonTypeAceptar ){
+            alertCustomer.showAndWait().ifPresent(buttonType -> {
+                if(buttonType == buttonTypeAccept){
                     try {
                         scene = new Scene(fxmlLoaderCustomer.load());
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                     stage = new Stage();
-                    stage.setTitle("Admin");
+                    stage.setTitle("Manage Customer");
                     stage.setScene(scene);
                     stage.show();
                 }
@@ -84,7 +95,29 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void searchProduct(ActionEvent actionEvent) {
+        Product product = productDAO.searchProduct(Integer.parseInt(codProduct.getText()));
+        if (product != null) {
+            setAlert(Alert.AlertType.CONFIRMATION,"Product found: "+product.name());
+            productName.setText(product.name());
+            stock.setText(String.valueOf(product.stock()));
+            price.setText(String.valueOf(product.price()));
+        }else{
 
+            alertProduct.showAndWait().ifPresent(buttonType -> {
+                if(buttonType == buttonTypeAccept){
+                    try {
+                        scene = new Scene(fxmlLoaderProduct.load());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    stage = new Stage();
+                    stage.setTitle("Manage Product");
+                    stage.setScene(scene);
+                    stage.show();
+                }
+            });
+
+        }
     }
 
     public void cancel(ActionEvent actionEvent) {
