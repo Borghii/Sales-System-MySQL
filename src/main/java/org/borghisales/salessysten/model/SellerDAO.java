@@ -2,6 +2,7 @@ package org.borghisales.salessysten.model;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import org.borghisales.salessysten.controllers.GenerateSaleController;
 import org.borghisales.salessysten.controllers.MenuController;
 
 import java.sql.Connection;
@@ -145,9 +146,11 @@ public class SellerDAO implements CRUD<Seller> {
             pstmt.setString(2,user);
 
             try (ResultSet rs = pstmt.executeQuery()){
-                if (rs.next())
+                if (rs.next()){
+                    GenerateSaleController.setSellerName(rs.getString("name"));
+                    GenerateSaleController.setIdSeller(rs.getInt("idSeller"));
                     return true;
-                else  {
+                }else{
                     MenuController.setAlert(Alert.AlertType.ERROR, "user not found") ;
                     return false;
                 }

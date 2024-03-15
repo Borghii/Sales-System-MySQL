@@ -21,7 +21,7 @@ public class ManagementController extends MenuController implements Initializabl
     private TabPane tabPaneManage;
 
     @FXML
-    void openSeller() throws InterruptedException {
+    void openSeller(ActionEvent actionEvent){
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
 
         openNewStage(SELLER_VIEW_FXML);

@@ -23,7 +23,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         mc.openNewStage(MAIN_VIEW_FXML);
-
     }
 
     public static void main(String[] args) {

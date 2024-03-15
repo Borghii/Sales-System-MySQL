@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="596.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.GenerateSaleController">
+<AnchorPane prefHeight="596.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.GenerateSaleController">
    <AnchorPane prefHeight="596.0" prefWidth="590.0">
       <Label layoutX="216.0" layoutY="11.0" prefHeight="39.0" prefWidth="279.0" text="POINT OF SALE &quot;BORGHI SYSTEM&quot;" underline="true">
          <font>
@@ -34,20 +41,20 @@
       <TextField fx:id="customerName" editable="false" layoutX="416.0" layoutY="166.0" prefHeight="25.0" prefWidth="148.0" />
       <TextField fx:id="productName" editable="false" layoutX="416.0" layoutY="199.0" prefHeight="25.0" prefWidth="148.0" />
       <TextField fx:id="stock" editable="false" layoutX="415.0" layoutY="234.0" prefHeight="25.0" prefWidth="148.0" />
-      <TextField fx:id="sell" editable="false" layoutX="415.0" layoutY="269.0" prefHeight="25.0" prefWidth="148.0" />
+      <TextField fx:id="seller" editable="false" layoutX="415.0" layoutY="269.0" prefHeight="25.0" prefWidth="148.0" />
       <Spinner fx:id="quantity" layoutX="125.0" layoutY="269.0" prefHeight="21.0" prefWidth="117.0" />
-      <Button layoutX="250.0" layoutY="166.0" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="25.0" prefWidth="67.0" text="SEARCH" />
-      <Button layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#searchProduct" prefHeight="25.0" prefWidth="67.0" text="SEARCH" />
-      <Button layoutX="250.0" layoutY="234.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="ADD" />
+      <Button layoutX="250.0" layoutY="166.0" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="25.0" prefWidth="80.0" text="SEARCH" />
+      <Button layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#searchProduct" prefHeight="25.0" prefWidth="80.0" text="SEARCH" />
+      <Button layoutX="250.0" layoutY="234.0" mnemonicParsing="false" onAction="#addShoppingCart" prefHeight="25.0" prefWidth="80.0" text="ADD" />
       <Separator layoutX="-2.0" layoutY="318.0" prefHeight="16.0" prefWidth="590.0" />
       <TableView fx:id="tableSale" layoutX="12.0" layoutY="335.0" prefHeight="208.0" prefWidth="568.0">
          <columns>
-            <TableColumn fx:id="colNro" prefWidth="71.0" text="NR" />
-            <TableColumn fx:id="colCod" prefWidth="92.0" text="COD" />
-            <TableColumn fx:id="colProduct" prefWidth="77.0" text="PRODUCT" />
-            <TableColumn fx:id="colQuantity" prefWidth="100.0" text="QUANTITY" />
-            <TableColumn fx:id="colPrice" prefWidth="124.0" text="PRICE UNIT" />
-            <TableColumn fx:id="colTotal" prefWidth="103.0" text="TOTAL" />
+            <TableColumn fx:id="colNro" prefWidth="71.0" sortable="false" style="-fx-alignment: CENTER;" text="NR" />
+            <TableColumn fx:id="colCod" prefWidth="92.0" sortable="false" style="-fx-alignment: CENTER;" text="COD" />
+            <TableColumn fx:id="colProduct" prefWidth="77.0" sortable="false" style="-fx-alignment: CENTER;" text="PRODUCT" />
+            <TableColumn fx:id="colQuantity" prefWidth="100.0" style="-fx-alignment: CENTER;" text="QUANTITY" />
+            <TableColumn fx:id="colPrice" prefWidth="124.0" style="-fx-alignment: CENTER;" text="PRICE UNIT" />
+            <TableColumn fx:id="colTotal" prefWidth="103.0" style="-fx-alignment: CENTER;" text="TOTAL" />
          </columns>
       </TableView>
       <Separator layoutX="-4.0" layoutY="551.0" prefHeight="2.0" prefWidth="590.0" />
@@ -61,8 +68,8 @@
       <Label layoutX="347.0" layoutY="170.0" text="CUSTOMER:" wrapText="true" />
       <Label layoutX="347.0" layoutY="204.0" text="PRODUCT:" wrapText="true" />
       <Label layoutX="347.0" layoutY="238.0" text="STOCK:" wrapText="true" />
-      <Label layoutX="347.0" layoutY="273.0" text="SELL:" wrapText="true" />
+      <Label layoutX="347.0" layoutY="273.0" text="SELLER:" wrapText="true" />
       <Label layoutX="397.0" layoutY="565.0" text="TOTAL SALE" wrapText="true" />
-      <TextField fx:id="date" editable="false" layoutX="251.0" layoutY="270.0" prefHeight="25.0" prefWidth="67.0" />
+      <TextField fx:id="date" editable="false" layoutX="251.0" layoutY="270.0" prefHeight="25.0" prefWidth="80.0" />
    </AnchorPane>
 </AnchorPane>

@@ -1,23 +1,36 @@
 package org.borghisales.salessysten.controllers;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.borghisales.salessysten.model.Customer;
-import org.borghisales.salessysten.model.CustomerDAO;
-import org.borghisales.salessysten.model.Product;
-import org.borghisales.salessysten.model.ProductDAO;
+import org.borghisales.salessysten.model.*;
 
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class GenerateSaleController extends MenuController implements Initializable {
 
+    private final SalesDAO salesDAO = new SalesDAO();
+    private int idSale;
+
+    private static int contProducts =1;
+    private static ObservableList<ShoppingCart> products;
+
+    private static String sellerName;
+    private static int idSeller;
+
+    private final LocalDate now = LocalDate.now();
 
     private final FXMLLoader fxmlLoaderCustomer = new FXMLLoader(MenuController.class.getResource(CUSTOMER_VIEW_FXML));
     private final FXMLLoader fxmlLoaderProduct = new FXMLLoader(MenuController.class.getResource(PRODUCT_VIEW_FXML));
@@ -32,6 +45,8 @@ public class GenerateSaleController extends MenuController implements Initializa
 
 
     private final CustomerDAO customerDAO = new CustomerDAO();
+
+    private Customer customer;
     private final ProductDAO productDAO = new ProductDAO();
 
     public TextField serial;
@@ -41,22 +56,34 @@ public class GenerateSaleController extends MenuController implements Initializa
     public TextField customerName;
     public TextField productName;
     public TextField stock;
-    public TextField sell;
+    public TextField seller;
 
     public TextField total;
     public TextField date;
 
-    public Spinner quantity;
-    public TableView tableSale;
-    public TableColumn colNro;
-    public TableColumn colCod;
-    public TableColumn colProduct;
-    public TableColumn colQuantity;
-    public TableColumn colPrice;
-    public TableColumn colTotal;
+
+    public Spinner<Integer> quantity;
+    public TableView<ShoppingCart> tableSale;
+    public TableColumn<ShoppingCart,Integer> colNro;
+    public TableColumn<ShoppingCart,String> colCod;
+    public TableColumn<ShoppingCart,String> colProduct;
+    public TableColumn<ShoppingCart, Integer> colQuantity;
+    public TableColumn<ShoppingCart, Double> colPrice;
+    public TableColumn<ShoppingCart,Double> colTotal;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println(idSeller);
+
+        total.setText("0.0");
+
+        idSale = 1+salesDAO.IdSale();
+        serial.setText("000"+ idSale);
+
+
+        seller.setText(sellerName);
+        date.setText(String.valueOf(now));
+
         alertCustomer.setTitle("New customer");
         alertCustomer.setHeaderText("The customer doesn´t exist");
         alertCustomer.setContentText("Do you want to add it?");
@@ -67,12 +94,22 @@ public class GenerateSaleController extends MenuController implements Initializa
         alertProduct.setContentText("Do you want to add it?");
         alertProduct.getButtonTypes().setAll(buttonTypeAccept, buttonTypeCancel);
 
+        colNro.setCellValueFactory(p->new SimpleIntegerProperty(p.getValue().nr()).asObject());
+        colCod.setCellValueFactory(p->new SimpleStringProperty(p.getValue().cod()));
+        colProduct.setCellValueFactory(p->new SimpleStringProperty(p.getValue().product()));
+        colQuantity.setCellValueFactory(p->new SimpleIntegerProperty(p.getValue().quantity()).asObject());
+        colPrice.setCellValueFactory(p->new SimpleDoubleProperty(p.getValue().price()).asObject());
+        colTotal.setCellValueFactory(p->new SimpleDoubleProperty(p.getValue().total()).asObject());
+
+        tableSale.getItems().clear();
+
+        products = FXCollections.observableArrayList();
 
     }
 
 
     public void searchCustomer(ActionEvent actionEvent) {
-        Customer customer = customerDAO.searchCustomer(Integer.parseInt(codCustomer.getText()));
+        customer = customerDAO.searchCustomer(Integer.parseInt(codCustomer.getText()));
         if (customer!=null) {
             setAlert(Alert.AlertType.CONFIRMATION,"Customer found: "+customer.name());
             customerName.setText(customer.name());
@@ -101,8 +138,9 @@ public class GenerateSaleController extends MenuController implements Initializa
             productName.setText(product.name());
             stock.setText(String.valueOf(product.stock()));
             price.setText(String.valueOf(product.price()));
+            SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, product.stock(), 0);
+            quantity.setValueFactory(valueFactory);
         }else{
-
             alertProduct.showAndWait().ifPresent(buttonType -> {
                 if(buttonType == buttonTypeAccept){
                     try {
@@ -124,6 +162,53 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void generateSale(ActionEvent actionEvent) {
+        Sales sales = new Sales(customer.idCustomer(),idSeller, serial.getText(),
+                          LocalDate.parse(date.getText()),Double.parseDouble(total.getText()),
+                          Sales.State.ACTIVE);
+
+
+        if (salesDAO.SaveSale(sales) ){
+            System.out.println("nashe");
+        }
+
+        if (salesDAO.SaveDetailsSale(products,idSale)){
+            System.out.println("nashe2");
+        }
+
+
+    }
+
+    public static void setSellerName(String sellerName) {
+        GenerateSaleController.sellerName = sellerName;
+    }
+
+    public static void setIdSeller(int idSeller) {
+        GenerateSaleController.idSeller = idSeller;
+    }
+
+    public void addShoppingCart(ActionEvent actionEvent) {
+        String errorMessage = validateInputs();
+        if (errorMessage != null) {
+            MenuController.setAlert(Alert.AlertType.ERROR, errorMessage);
+            return;
+        }
+
+        ShoppingCart product = new ShoppingCart(contProducts++,codProduct.getText(),
+                productName.getText(),quantity.getValue(),
+                Double.parseDouble(price.getText()));
+
+        products.add(product);
+        tableSale.setItems(products);
+        total.setText(String.valueOf(Double.parseDouble(total.getText()) + product.total()));
+    }
+
+    private String validateInputs() {
+        if (productName.getText().isEmpty() || customerName.getText().isEmpty()) {
+            return "Missing customer name or product name.";
+        } else if (quantity.getValue() == 0) {
+            return "Quantity can't be 0.";
+        }
+        return null;
     }
 
 
