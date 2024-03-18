@@ -23,7 +23,6 @@ public class ManagementController extends MenuController implements Initializabl
     @FXML
     void openSeller(ActionEvent actionEvent){
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-
         openNewStage(SELLER_VIEW_FXML);
         closeCurrentStage(sellerButton);
     }
@@ -36,7 +35,6 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void openCustomer(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-
         openNewStage(CUSTOMER_VIEW_FXML);
         closeCurrentStage(sellerButton);
 
@@ -44,7 +42,6 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void openProduct(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-
         openNewStage(PRODUCT_VIEW_FXML);
         closeCurrentStage(sellerButton);
 
@@ -52,9 +49,15 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void openGenerateSale(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-
         openNewStage(GENERATESALE_VIEW_FXML);
         closeCurrentStage(sellerButton);
+    }
 
+    public void help(ActionEvent actionEvent) {
+    }
+
+    public void exit(ActionEvent actionEvent) {
+        openNewStage(MAIN_VIEW_FXML);
+        closeCurrentStage(sellerButton);
     }
 }

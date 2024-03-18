@@ -11,8 +11,8 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="525.0">
                      <children>
-                        <Button layoutX="78.0" layoutY="76.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="160.0" text="HELP" />
-                        <Button layoutX="78.0" layoutY="219.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="160.0" text="EXIT" />
+                        <Button layoutX="78.0" layoutY="76.0" mnemonicParsing="false" onAction="#help" prefHeight="70.0" prefWidth="160.0" text="HELP" />
+                        <Button layoutX="78.0" layoutY="219.0" mnemonicParsing="false" onAction="#exit" prefHeight="70.0" prefWidth="160.0" text="EXIT" />
                      </children>
                   </AnchorPane>
             </content>

@@ -57,7 +57,6 @@ public class GenerateSaleController extends MenuController implements Initializa
     public TextField productName;
     public TextField stock;
     public TextField seller;
-
     public TextField total;
     public TextField date;
 
@@ -77,8 +76,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
         total.setText("0.0");
 
-        idSale = 1+salesDAO.IdSale();
-        serial.setText("000"+ idSale);
+        setSerial();
 
 
         seller.setText(sellerName);
@@ -159,6 +157,11 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void cancel(ActionEvent actionEvent) {
+        MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
+        quantity.getValueFactory().setValue(null);
+        tableSale.getItems().clear();
+        MenuController.setAlert(Alert.AlertType.INFORMATION,"Sale Canceled");
+        total.clear();
     }
 
     public void generateSale(ActionEvent actionEvent) {
@@ -167,12 +170,12 @@ public class GenerateSaleController extends MenuController implements Initializa
                           Sales.State.ACTIVE);
 
 
-        if (salesDAO.SaveSale(sales) ){
-            System.out.println("nashe");
-        }
-
-        if (salesDAO.SaveDetailsSale(products,idSale)){
-            System.out.println("nashe2");
+        if (salesDAO.SaveSale(sales) && salesDAO.SaveDetailsSale(products,idSale) ){
+            MenuController.setAlert(Alert.AlertType.CONFIRMATION,"Successful Sale");
+            MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
+            quantity.getValueFactory().setValue(null);
+            tableSale.getItems().clear();
+            setSerial();
         }
 
 
@@ -199,7 +202,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
         products.add(product);
         tableSale.setItems(products);
-        total.setText(String.valueOf(Double.parseDouble(total.getText()) + product.total()));
+        total.setText(String.format("%.2f",Double.parseDouble(total.getText()) + product.total()));
     }
 
     private String validateInputs() {
@@ -209,6 +212,12 @@ public class GenerateSaleController extends MenuController implements Initializa
             return "Quantity can't be 0.";
         }
         return null;
+    }
+
+    private void setSerial(){
+        idSale = 1+salesDAO.IdSale();
+        String formattedId= String.format("%04d", idSale);
+        serial.setText(formattedId);
     }
 
 
