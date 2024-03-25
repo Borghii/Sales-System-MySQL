@@ -11,6 +11,25 @@ import java.sql.SQLException;
 
 public class ProductDAO implements CRUD<Product>{
 
+    public void subtractStock(ObservableList<ShoppingCart> products){
+        String sql = "UPDATE product SET stock = stock - ? WHERE idProduct = ?";
+
+        try(Connection conn = DBConnection.connection()){
+
+            for (ShoppingCart e:products) {
+                try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+                    pstmt.setInt(1,e.quantity());
+                    pstmt.setInt(2,Integer.parseInt(e.cod()));
+                    pstmt.executeUpdate();
+                }
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     public Product searchProduct(int idProduct){
         String sql = "SELECT * FROM product WHERE idProduct = ?";
 

@@ -17,6 +17,7 @@ import org.borghisales.salessysten.model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class GenerateSaleController extends MenuController implements Initializable {
@@ -165,20 +166,27 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void generateSale(ActionEvent actionEvent) {
+
+        if (products.isEmpty()){
+            MenuController.setAlert(Alert.AlertType.ERROR,"There is no product added");
+            return;
+        }
+
         Sales sales = new Sales(customer.idCustomer(),idSeller, serial.getText(),
                           LocalDate.parse(date.getText()),Double.parseDouble(total.getText()),
                           Sales.State.ACTIVE);
 
 
         if (salesDAO.SaveSale(sales) && salesDAO.SaveDetailsSale(products,idSale) ){
+            productDAO.subtractStock(products);
             MenuController.setAlert(Alert.AlertType.CONFIRMATION,"Successful Sale");
             MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
             quantity.getValueFactory().setValue(null);
             tableSale.getItems().clear();
             setSerial();
+            total.setText("0.0");
+            products.clear();
         }
-
-
     }
 
     public static void setSellerName(String sellerName) {
@@ -190,7 +198,9 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     public void addShoppingCart(ActionEvent actionEvent) {
+
         String errorMessage = validateInputs();
+
         if (errorMessage != null) {
             MenuController.setAlert(Alert.AlertType.ERROR, errorMessage);
             return;
@@ -199,6 +209,11 @@ public class GenerateSaleController extends MenuController implements Initializa
         ShoppingCart product = new ShoppingCart(contProducts++,codProduct.getText(),
                 productName.getText(),quantity.getValue(),
                 Double.parseDouble(price.getText()));
+
+        if (products.stream().anyMatch(e -> Objects.equals(e.cod(), product.cod()))){
+            MenuController.setAlert(Alert.AlertType.ERROR, "This product is already in your shopping cart");
+            return;
+        }
 
         products.add(product);
         tableSale.setItems(products);
