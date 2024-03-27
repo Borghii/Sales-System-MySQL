@@ -147,8 +147,11 @@ public class SellerDAO implements CRUD<Seller> {
 
             try (ResultSet rs = pstmt.executeQuery()){
                 if (rs.next()){
+
                     GenerateSaleController.setSellerName(rs.getString("name"));
                     GenerateSaleController.setIdSeller(rs.getInt("idSeller"));
+
+
                     return true;
                 }else{
                     MenuController.setAlert(Alert.AlertType.ERROR, "user not found") ;

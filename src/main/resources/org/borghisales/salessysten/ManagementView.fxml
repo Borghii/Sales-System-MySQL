@@ -17,7 +17,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="VENTAS">
+          <Tab text="SALES">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -26,7 +26,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="MANTENIMIENTO">
+            <Tab text="MANAGEMENT">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -37,7 +37,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="REPORTES">
+            <Tab text="REPORTS">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
