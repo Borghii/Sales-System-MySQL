@@ -2,6 +2,7 @@ package org.borghisales.salessysten.model;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
 
 import java.sql.*;
@@ -95,4 +96,25 @@ public class SalesDAO {
 
     }
 
+    public void setTable(ObservableList<Sales> sales) {
+        String sql = "SELECT * FROM sales WHERE idSeller = ?";
+
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setInt(1, MainController.sellerLog.idSeller());
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    Sales sale = Sales.fromResultSet(rs);
+                    sales.add(sale);
+                }
+            }
+
+        }catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+        }
+
+
+    }
 }

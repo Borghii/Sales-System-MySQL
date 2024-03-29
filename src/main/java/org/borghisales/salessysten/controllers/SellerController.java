@@ -124,4 +124,6 @@ public class SellerController implements Initializable {
         sellerDAO.setTable(sellers);
         tableSellers.setItems(sellers);
     }
+
+
 }

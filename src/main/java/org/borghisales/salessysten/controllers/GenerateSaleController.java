@@ -186,7 +186,11 @@ public class GenerateSaleController extends MenuController implements Initializa
             setSerial();
             total.setText("0.0");
             products.clear();
+
+            //Para que al ingresar a reports se actulize la tabla
+            ReportsController.setSales(null);
         }
+
     }
 
     public static void setSellerName(String sellerName) {

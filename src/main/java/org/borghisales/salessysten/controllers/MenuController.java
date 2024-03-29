@@ -18,6 +18,8 @@ public class MenuController {
     public static final String PRODUCT_VIEW_FXML = "/org/borghisales/salessysten/ProductView.fxml";
     public static final String CUSTOMER_VIEW_FXML = "/org/borghisales/salessysten/CustomerView.fxml";
     public static final String GENERATESALE_VIEW_FXML = "/org/borghisales/salessysten/GenerateSaleView.fxml";
+    public static final String REPORT_VIEW_FXML = "/org/borghisales/salessysten/ReportsView.fxml";
+
 
     static Alert alert;
     static ButtonType botonAceptar = new ButtonType("Aceptar");

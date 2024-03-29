@@ -41,7 +41,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="160.0" text="SALES REPORT" />
+                        <Button layoutX="78.0" layoutY="151.0" mnemonicParsing="false" onAction="#openSalesReport" prefHeight="70.0" prefWidth="160.0" text="SALES REPORT" />
                      </children>
                   </AnchorPane>
               </content>

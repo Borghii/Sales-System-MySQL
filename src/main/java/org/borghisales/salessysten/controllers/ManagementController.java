@@ -52,6 +52,12 @@ public class ManagementController extends MenuController implements Initializabl
         openNewStage(GENERATESALE_VIEW_FXML);
         closeCurrentStage(sellerButton);
     }
+    public void openSalesReport(ActionEvent actionEvent) {
+        lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
+        openNewStage(REPORT_VIEW_FXML);
+        closeCurrentStage(sellerButton);
+
+    }
 
     public void help(ActionEvent actionEvent) {
     }
@@ -60,4 +66,6 @@ public class ManagementController extends MenuController implements Initializabl
         openNewStage(MAIN_VIEW_FXML);
         closeCurrentStage(sellerButton);
     }
+
+
 }

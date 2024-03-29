@@ -3,6 +3,7 @@ package org.borghisales.salessysten.model;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.GenerateSaleController;
+import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
 
 import java.sql.Connection;
@@ -151,6 +152,7 @@ public class SellerDAO implements CRUD<Seller> {
                     GenerateSaleController.setSellerName(rs.getString("name"));
                     GenerateSaleController.setIdSeller(rs.getInt("idSeller"));
 
+                    MainController.sellerLog = Seller.fromResultSet(rs);
 
                     return true;
                 }else{
