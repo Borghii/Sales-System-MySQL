@@ -26,6 +26,7 @@ public class MainController extends MenuController implements Initializable {
 
         //Por si se cambia de usuario que se actualize los reportes de ese usuario
         ReportsController.setSales(null);
+        ReportsController.setPieChartData(null);
 
     }
 

@@ -1,7 +1,9 @@
 package org.borghisales.salessysten.model;
 
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
+import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
 
 import java.sql.Connection;
@@ -162,4 +164,33 @@ public class ProductDAO implements CRUD<Product>{
         }
 
     }
+    public static void setPieChart(ObservableList<PieChart.Data> pieChartData) {
+        String sql = """ 
+                SELECT p.name, sum(s.quantity) as cant
+                FROM product p
+                INNER JOIN sales_details s
+                USING (idProduct)
+                WHERE s.idSales in (SELECT idSales FROM sales where idSeller=?)
+                GROUP BY s.idProduct;
+                """;
+
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setInt(1, MainController.sellerLog.idSeller());
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    pieChartData.add(new PieChart.Data(rs.getString("name"),rs.getInt("cant")));
+                }
+            }
+
+        }catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+        }
+
+
+
+    }
+
 }

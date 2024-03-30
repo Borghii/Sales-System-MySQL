@@ -189,6 +189,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
             //Para que al ingresar a reports se actulize la tabla
             ReportsController.setSales(null);
+            ReportsController.setPieChartData(null);
         }
 
     }

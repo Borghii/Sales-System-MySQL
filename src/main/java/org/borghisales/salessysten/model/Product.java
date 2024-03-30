@@ -19,4 +19,6 @@ public record Product(int idProduct, String name, double price, int stock, State
         return new Product(id, name, price, stock, state);
     }
 
+
+
 }
