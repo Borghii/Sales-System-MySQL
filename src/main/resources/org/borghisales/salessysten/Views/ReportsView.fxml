@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="778.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ReportsController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="778.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ReportsController">
   <tabs>
     <Tab text="SALES HISTORY">
       <content>
@@ -53,7 +65,7 @@
                   </Label>
                   <ImageView fitHeight="87.0" fitWidth="80.0" layoutX="51.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/report.png" />
+                        <Image url="@../../../../images/report.png" />
                      </image>
                   </ImageView>
                   <Button layoutX="660.0" layoutY="491.0" mnemonicParsing="false" onAction="#onExport" prefHeight="32.0" prefWidth="94.0" text="EXPORT " />
@@ -66,6 +78,24 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <PieChart fx:id="pieChartProducts" layoutX="14.0" layoutY="87.0" prefHeight="368.0" prefWidth="388.0" />
+                  <Label layoutX="86.0" layoutY="57.0" text="AMOUNT PRODUCST SOLD" underline="true" wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="487.0" layoutY="57.0" text="SALES OVER TIME" underline="true" wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <LineChart fx:id="salesLineChart" layoutX="373.0" layoutY="128.0" prefHeight="320.0" prefWidth="386.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" fx:id="x_time" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="y_amountSales" side="LEFT" />
+                    </yAxis>
+                  </LineChart>
                </children></AnchorPane>
       </content>
     </Tab>

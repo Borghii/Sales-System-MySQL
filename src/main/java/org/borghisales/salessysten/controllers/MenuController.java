@@ -12,13 +12,13 @@ import java.util.HashMap;
 
 public class MenuController {
 
-    public static final String MAIN_VIEW_FXML = "/org/borghisales/salessysten/MainView.fxml";
-    public static final String MANAGEMENT_VIEW_FXML = "/org/borghisales/salessysten/ManagementView.fxml";
-    public static final String SELLER_VIEW_FXML = "/org/borghisales/salessysten/SellerView.fxml";
-    public static final String PRODUCT_VIEW_FXML = "/org/borghisales/salessysten/ProductView.fxml";
-    public static final String CUSTOMER_VIEW_FXML = "/org/borghisales/salessysten/CustomerView.fxml";
-    public static final String GENERATESALE_VIEW_FXML = "/org/borghisales/salessysten/GenerateSaleView.fxml";
-    public static final String REPORT_VIEW_FXML = "/org/borghisales/salessysten/ReportsView.fxml";
+    public static final String MAIN_VIEW_FXML = "/org/borghisales/salessysten/Views/MainView.fxml";
+    public static final String MANAGEMENT_VIEW_FXML = "/org/borghisales/salessysten/Views/ManagementView.fxml";
+    public static final String SELLER_VIEW_FXML = "/org/borghisales/salessysten/Views/SellerView.fxml";
+    public static final String PRODUCT_VIEW_FXML = "/org/borghisales/salessysten/Views/ProductView.fxml";
+    public static final String CUSTOMER_VIEW_FXML = "/org/borghisales/salessysten/Views/CustomerView.fxml";
+    public static final String GENERATESALE_VIEW_FXML = "/org/borghisales/salessysten/Views/GenerateSaleView.fxml";
+    public static final String REPORT_VIEW_FXML = "/org/borghisales/salessysten/Views/ReportsView.fxml";
 
 
     static Alert alert;

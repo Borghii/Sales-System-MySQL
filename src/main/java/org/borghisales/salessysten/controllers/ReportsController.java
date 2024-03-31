@@ -1,8 +1,7 @@
 package org.borghisales.salessysten.controllers;
 
-import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.*;
 
 import javafx.collections.ObservableList;
 
@@ -36,6 +35,16 @@ public class ReportsController implements Initializable {
     private final SalesDAO salesDAO = new SalesDAO();
     private static ObservableList<Sales> sales = null;
     private static ObservableList<PieChart.Data> pieChartData = null;
+    private static XYChart.Series<String,Integer> lineChartData = null;
+
+
+    @FXML
+    private LineChart<String,Integer> salesLineChart;
+
+    @FXML
+    private CategoryAxis x_time;
+    @FXML
+    private NumberAxis y_amountSales;
 
     @FXML
     private PieChart pieChartProducts;
@@ -70,6 +79,7 @@ public class ReportsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
         cbTypeExport.setValue(".PDF");
         cbTypeExport.setItems(exportList);
 
@@ -87,19 +97,30 @@ public class ReportsController implements Initializable {
             sales = FXCollections.observableArrayList();
             salesDAO.setTable(sales);
         }
-        if (pieChartData ==null){
-            pieChartProducts.setTitle("Products sold");
-            pieChartData = FXCollections.observableArrayList();
-            ProductDAO.setPieChart(pieChartData);
+
+        if (lineChartData == null){
+            lineChartData = new XYChart.Series<>();
+            salesDAO.setLineChart(lineChartData);
         }
 
-        pieChartData.forEach(data ->
-                data.nameProperty().bind(
-                        Bindings.concat(
-                                data.getName(), " amount: ", data.pieValueProperty()
-                        )
-                )
-        );
+        if (pieChartData ==null){
+
+            pieChartData = FXCollections.observableArrayList();
+            ProductDAO.setPieChart(pieChartData);
+
+            pieChartData.forEach(data ->
+                    data.nameProperty().bind(
+                            Bindings.concat(
+                                    data.getName(), " amount: ", (int)data.pieValueProperty().doubleValue()
+                            )
+                    )
+            );
+        }
+
+
+        salesLineChart.getData().addAll(lineChartData);
+
+
 
         pieChartProducts.getData().addAll(pieChartData);
         tableReport.setItems(sales);
@@ -148,6 +169,10 @@ public class ReportsController implements Initializable {
 
     public static void setPieChartData(ObservableList<PieChart.Data> pieChartData) {
         ReportsController.pieChartData = pieChartData;
+    }
+
+    public static void setLineChartData(XYChart.Series<String, Integer> lineChartData) {
+        ReportsController.lineChartData = lineChartData;
     }
 
     public void onExport(ActionEvent actionEvent) {

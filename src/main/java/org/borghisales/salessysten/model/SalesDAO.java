@@ -1,12 +1,13 @@
 package org.borghisales.salessysten.model;
 
 import javafx.collections.ObservableList;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class SalesDAO {
 
@@ -119,4 +120,28 @@ public class SalesDAO {
 
     }
 
+    public void setLineChart(XYChart.Series<String, Integer> lineChartData) {
+        String sql = """ 
+                SELECT saleDate, count(saleDate) as salesPerDay
+                FROM sales
+                WHERE idSeller=?
+                GROUP BY saleDate;
+                """;
+
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setInt(1, MainController.sellerLog.idSeller());
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    lineChartData.getData().add(new XYChart.Data<>(rs.getDate("saleDate").toLocalDate().toString(),rs.getInt("salesPerDay")));
+                    System.out.println(rs.getDate("saleDate").toLocalDate()+" "+rs.getInt("salesPerDay"));
+                }
+            }
+
+        }catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+        }
+    }
 }

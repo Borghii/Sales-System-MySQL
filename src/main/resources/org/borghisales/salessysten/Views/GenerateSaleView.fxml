@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="596.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.GenerateSaleController">
+<AnchorPane prefHeight="596.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.GenerateSaleController">
    <AnchorPane prefHeight="596.0" prefWidth="590.0">
       <Label layoutX="216.0" layoutY="11.0" prefHeight="39.0" prefWidth="279.0" text="POINT OF SALE &quot;BORGHI SYSTEM&quot;" underline="true">
          <font>
@@ -20,7 +13,7 @@
          </font>
       </Label>
       <ImageView fitHeight="111.0" fitWidth="117.0" layoutX="50.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../../images/img_1.png" />
+         <Image url="@../../../../images/img_1.png" />
       </ImageView>
       <Separator layoutX="6.0" layoutY="135.0" prefHeight="16.0" prefWidth="584.0" />
       <Label layoutX="234.0" layoutY="43.0" prefHeight="21.0" prefWidth="244.0" text="SALE OF TECHNOLOGY PRODUCTS">
@@ -60,7 +53,7 @@
       <Separator layoutX="-4.0" layoutY="551.0" prefHeight="2.0" prefWidth="590.0" />
       <Button layoutX="53.0" layoutY="561.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="102.0" text="CANCEL" />
       <Button layoutX="192.0" layoutY="561.0" mnemonicParsing="false" onAction="#generateSale" text="GENERATE SALE" />
-      <TextField fx:id="total" layoutX="472.0" layoutY="561.0" prefWidth="88.0" />
+      <TextField fx:id="total" editable="false" layoutX="472.0" layoutY="561.0" prefWidth="88.0" />
       <Label layoutX="21.0" layoutY="170.0" text="COD CUSTOMER:" wrapText="true" />
       <Label layoutX="21.0" layoutY="204.0" text="COD PROD:" wrapText="true" />
       <Label layoutX="22.0" layoutY="238.0" text="PRICE:" wrapText="true" />
