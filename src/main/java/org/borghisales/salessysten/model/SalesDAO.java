@@ -7,7 +7,6 @@ import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
 
 import java.sql.*;
-import java.time.LocalDate;
 
 public class SalesDAO {
 
@@ -76,15 +75,6 @@ public class SalesDAO {
 
                     pstmt.executeUpdate();
 
-//                    int rows_affected = pstmt.executeUpdate();
-
-//                    if (rows_affected > 0) {
-//                        MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Sale details saved correctly");
-//                        return true;
-//                    } else {
-//                        MenuController.setAlert(Alert.AlertType.ERROR, "Error saving sale details : ");
-//                        return false;
-//                    }
                 }
             }
                 return true;
@@ -136,12 +126,38 @@ public class SalesDAO {
             try (ResultSet rs = pstmt.executeQuery()){
                 while (rs.next()){
                     lineChartData.getData().add(new XYChart.Data<>(rs.getDate("saleDate").toLocalDate().toString(),rs.getInt("salesPerDay")));
-                    System.out.println(rs.getDate("saleDate").toLocalDate()+" "+rs.getInt("salesPerDay"));
                 }
             }
 
         }catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
         }
+    }
+
+    public void setTableDetails(ObservableList<ShoppingCart> productsDetails, int idSale) {
+        String sql = """ 
+                SELECT ROW_NUMBER() OVER() as nr, sd.idProduct as cod, p.name as product, sd.quantity, sd.priceSale as price, ROUND(sd.quantity *sd.priceSale,2) as total
+                FROM sales_details sd
+                INNER JOIN product p
+                USING(idProduct)
+                WHERE idSales = ?;
+                """;
+
+        try (Connection conn = DBConnection.connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setInt(1, idSale);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    ShoppingCart sc = ShoppingCart.fromResultSet(rs);
+                    productsDetails.add(sc);
+                }
+            }
+
+        }catch (SQLException e){
+            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());
+        }
+
     }
 }

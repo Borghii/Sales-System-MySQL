@@ -1,10 +1,14 @@
 package org.borghisales.salessysten.controllers;
 
 import javafx.beans.binding.Bindings;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.*;
 
 import javafx.collections.ObservableList;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 
@@ -20,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.borghisales.salessysten.model.*;
 
 
@@ -28,6 +33,7 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 public class ReportsController implements Initializable {
+
 
     private final ObservableList<String> exportList = FXCollections.observableArrayList(".PDF",".XLSX",".CSV");
 
@@ -79,6 +85,27 @@ public class ReportsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        //Capturar el evento de click en fila
+        tableReport.setOnMouseClicked(mouseEvent -> {
+            if (!tableReport.getSelectionModel().isEmpty() && mouseEvent.getClickCount()==2){
+
+
+                int idSales = tableReport.getSelectionModel().getSelectedItem().idSales();
+                SaleDetailController.setIdSale(idSales);
+
+                FXMLLoader fxmlLoaderSaleDetails= new FXMLLoader(MenuController.class.getResource(MainController.SALE_DETAIL_VIEW_FXML));
+
+                try {
+                    Scene scene = new Scene(fxmlLoaderSaleDetails.load());
+                    Stage stage = new Stage();
+                    stage.setTitle("Sale detail");
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
         cbTypeExport.setValue(".PDF");
         cbTypeExport.setItems(exportList);

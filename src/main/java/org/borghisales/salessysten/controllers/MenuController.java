@@ -17,8 +17,10 @@ public class MenuController {
     public static final String SELLER_VIEW_FXML = "/org/borghisales/salessysten/Views/SellerView.fxml";
     public static final String PRODUCT_VIEW_FXML = "/org/borghisales/salessysten/Views/ProductView.fxml";
     public static final String CUSTOMER_VIEW_FXML = "/org/borghisales/salessysten/Views/CustomerView.fxml";
-    public static final String GENERATESALE_VIEW_FXML = "/org/borghisales/salessysten/Views/GenerateSaleView.fxml";
+    public static final String GENERATE_SALE_VIEW_FXML = "/org/borghisales/salessysten/Views/GenerateSaleView.fxml";
     public static final String REPORT_VIEW_FXML = "/org/borghisales/salessysten/Views/ReportsView.fxml";
+    public static final String SALE_DETAIL_VIEW_FXML = "/org/borghisales/salessysten/Views/SaleDetailView.fxml";
+
 
 
     static Alert alert;

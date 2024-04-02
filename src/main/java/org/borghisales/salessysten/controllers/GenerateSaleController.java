@@ -33,8 +33,6 @@ public class GenerateSaleController extends MenuController implements Initializa
 
     private final LocalDate now = LocalDate.now();
 
-    private final FXMLLoader fxmlLoaderCustomer = new FXMLLoader(MenuController.class.getResource(CUSTOMER_VIEW_FXML));
-    private final FXMLLoader fxmlLoaderProduct = new FXMLLoader(MenuController.class.getResource(PRODUCT_VIEW_FXML));
 
     private Scene scene = null;
     private Stage stage;
@@ -115,6 +113,9 @@ public class GenerateSaleController extends MenuController implements Initializa
         }else{
             alertCustomer.showAndWait().ifPresent(buttonType -> {
                 if(buttonType == buttonTypeAccept){
+
+                    FXMLLoader fxmlLoaderCustomer = new FXMLLoader(MenuController.class.getResource(CUSTOMER_VIEW_FXML));
+
                     try {
                         scene = new Scene(fxmlLoaderCustomer.load());
                     } catch (IOException e) {
@@ -142,6 +143,8 @@ public class GenerateSaleController extends MenuController implements Initializa
         }else{
             alertProduct.showAndWait().ifPresent(buttonType -> {
                 if(buttonType == buttonTypeAccept){
+                    FXMLLoader fxmlLoaderProduct = new FXMLLoader(MenuController.class.getResource(PRODUCT_VIEW_FXML));
+
                     try {
                         scene = new Scene(fxmlLoaderProduct.load());
                     } catch (IOException e) {
