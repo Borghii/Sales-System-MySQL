@@ -1,22 +1,18 @@
 package org.borghisales.salessysten.controllers;
 
 
-import javafx.application.Platform;
-import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import org.borghisales.salessysten.model.Seller;
 import org.borghisales.salessysten.model.SellerDAO;
 
@@ -38,7 +34,6 @@ public class SellerController implements Initializable {
     private TextField user;
     @FXML
     private ComboBox<Seller.State> cbState;
-
     @FXML
     private TableView<Seller> tableSellers;
     @FXML
@@ -57,33 +52,40 @@ public class SellerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeTable();
+        initializeComboBox();
+        initializeSellerData();
+    }
 
-
-        //Capturar el evento de click en fila
+    private void initializeTable() {
         tableSellers.setOnMouseClicked(mouseEvent -> {
-            if (!tableSellers.getSelectionModel().isEmpty() && mouseEvent.getClickCount()==2){
+            if (!tableSellers.getSelectionModel().isEmpty() && mouseEvent.getClickCount() == 2) {
                 Seller seller = tableSellers.getSelectionModel().getSelectedItem();
                 setCells(seller);
             }
         });
-        cbState.setValue(Seller.State.ACTIVE);
-        cbState.setItems(stateList);
 
         colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idSeller()).asObject());
         colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().dni()));
         colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
         colPhone.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().phoneNumber()));
-        colState.setCellValueFactory(p -> new SimpleObjectProperty<Seller.State>(p.getValue().state()));
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
+    }
 
+    private void initializeComboBox() {
+        cbState.setValue(Seller.State.ACTIVE);
+        cbState.setItems(stateList);
+    }
+
+    private void initializeSellerData() {
         tableSellers.getItems().clear();
-
-        if (sellers == null){
+        if (sellers == null) {
             sellers = FXCollections.observableArrayList();
             sellerDAO.setTable(sellers);
         }
         tableSellers.setItems(sellers);
-
     }
+
 
     public void addSeller(ActionEvent actionEvent){
         Seller seller = new Seller(dni.getText(),name.getText(),phone.getText(), cbState.getValue(),user.getText());

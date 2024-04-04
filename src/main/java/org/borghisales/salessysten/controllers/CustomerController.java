@@ -1,6 +1,5 @@
 package org.borghisales.salessysten.controllers;
 
-import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,9 +22,7 @@ import java.util.ResourceBundle;
 public class CustomerController implements Initializable {
 
     private final CustomerDAO customerDAO = new CustomerDAO();
-
     private final ObservableList<Customer.State> stateList = FXCollections.observableArrayList(Customer.State.ACTIVE, Customer.State.DISACTIVE);
-
     private static ObservableList<Customer> customers=null;
 
     @FXML
@@ -45,39 +42,41 @@ public class CustomerController implements Initializable {
     @FXML
     private TableColumn<Customer,String> colName;
     @FXML
-    private TableColumn<Customer,String> colAdress;
+    private TableColumn<Customer,String> colAddress;
     @FXML
     private TableColumn<Customer,Customer.State> colState;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tableCustomers.setOnMouseClicked(mouseEvent->{
-            if (!tableCustomers.getSelectionModel().isEmpty() && mouseEvent.getClickCount()==2){
+        initializeTable();
+        initializeComboBox();
+        initializeCustomerData();
+    }
+    private void initializeCustomerData() {
+        tableCustomers.getItems().clear();
+        if (customers == null) {
+            customers = FXCollections.observableArrayList();
+            customerDAO.setTable(customers);
+        }
+        tableCustomers.setItems(customers);
+    }
+    private void initializeTable() {
+        tableCustomers.setOnMouseClicked(mouseEvent -> {
+            if (!tableCustomers.getSelectionModel().isEmpty() && mouseEvent.getClickCount() == 2) {
                 Customer customer = tableCustomers.getSelectionModel().getSelectedItem();
                 setCells(customer);
             }
         });
 
-
-        cbState.setValue(Customer.State.ACTIVE);
-        cbState.setItems(stateList);
-
         colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idCustomer()).asObject());
         colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
-        colDni.setCellValueFactory(p-> new SimpleStringProperty(p.getValue().dni()));
-        colAdress.setCellValueFactory(p-> new SimpleStringProperty(p.getValue().address()));
-        colState.setCellValueFactory(p -> new SimpleObjectProperty<Customer.State>(p.getValue().state()));
-
-        tableCustomers.getItems().clear();
-
-        if (customers==null){
-            customers = FXCollections.observableArrayList();
-            customerDAO.setTable(customers);
-        }
-
-        tableCustomers.setItems(customers);
-
-
+        colDni.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().dni()));
+        colAddress.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().address()));
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
+    }
+    private void initializeComboBox() {
+        cbState.setValue(Customer.State.ACTIVE);
+        cbState.setItems(stateList);
     }
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
@@ -118,6 +117,5 @@ public class CustomerController implements Initializable {
         customerDAO.setTable(customers);
         tableCustomers.setItems(customers);
     }
-
 
 }

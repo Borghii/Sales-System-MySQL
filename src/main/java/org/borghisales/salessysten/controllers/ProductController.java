@@ -1,6 +1,5 @@
 package org.borghisales.salessysten.controllers;
 
-import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -16,7 +15,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.borghisales.salessysten.model.Product;
 import org.borghisales.salessysten.model.ProductDAO;
-import org.borghisales.salessysten.model.Seller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,14 +28,12 @@ public class ProductController implements Initializable {
     private static ObservableList<Product> products =null;
     @FXML
     private ComboBox<Product.State> cbState;
-
     @FXML
     private TextField name;
     @FXML
     private TextField price;
     @FXML
     private TextField stock;
-
     @FXML
     private TableView<Product> tableProducts;
     @FXML
@@ -54,37 +50,38 @@ public class ProductController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Capturar el evento de click en fila
+        initializeTable();
+        initializeComboBox();
+        initializeProductData();
+    }
+
+    private void initializeTable() {
         tableProducts.setOnMouseClicked(mouseEvent -> {
-            if (!tableProducts.getSelectionModel().isEmpty() && mouseEvent.getClickCount()==2){
+            if (!tableProducts.getSelectionModel().isEmpty() && mouseEvent.getClickCount() == 2) {
                 Product product = tableProducts.getSelectionModel().getSelectedItem();
                 setCells(product);
             }
         });
 
-
-
-        cbState.setValue(Product.State.ACTIVE);
-        cbState.setItems(stateList);
-
-
-
         colId.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().idProduct()).asObject());
         colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().name()));
         colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
         colStock.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().stock()).asObject());
-        colState.setCellValueFactory(p -> new SimpleObjectProperty<Product.State>(p.getValue().state()));
+        colState.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().state()));
+    }
 
+    private void initializeComboBox() {
+        cbState.setValue(Product.State.ACTIVE);
+        cbState.setItems(stateList);
+    }
+
+    private void initializeProductData() {
         tableProducts.getItems().clear();
-
-        if (products == null){
+        if (products == null) {
             products = FXCollections.observableArrayList();
             productDAO.setTable(products);
         }
-
         tableProducts.setItems(products);
-
-
     }
 
     public void addProduct(ActionEvent actionEvent) {
