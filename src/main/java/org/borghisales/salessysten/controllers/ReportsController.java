@@ -2,7 +2,6 @@ package org.borghisales.salessysten.controllers;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 
@@ -29,11 +28,18 @@ import org.borghisales.salessysten.model.*;
 
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 public class ReportsController implements Initializable {
 
+    private final String[] monthsShowed = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    private static int idxMonth = LocalDate.now().getMonth().getValue()-1;
+    private static int yearsShowed = LocalDate.now().getYear();
+
+
+    private static HashMap<Integer,HashMap<String,XYChart.Series<String,Integer>>> cacheReportLineChart=null;
 
     private final ObservableList<String> exportList = FXCollections.observableArrayList(".PDF",".XLSX",".CSV");
 
@@ -42,6 +48,11 @@ public class ReportsController implements Initializable {
     private static ObservableList<Sales> sales = null;
     private static ObservableList<PieChart.Data> pieChartData = null;
     private static XYChart.Series<String,Integer> lineChartData = null;
+
+    @FXML
+    private TextField year;
+    @FXML
+    public TextField month;
 
 
     @FXML
@@ -82,8 +93,14 @@ public class ReportsController implements Initializable {
     @FXML
     private TableColumn<Sales, Sales.State> colState;
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        year.setText(String.valueOf(yearsShowed));
+        month.setText(monthsShowed[idxMonth]);
+
 
         //Capturar el evento de click en fila
         tableReport.setOnMouseClicked(mouseEvent -> {
@@ -127,7 +144,7 @@ public class ReportsController implements Initializable {
 
         if (lineChartData == null){
             lineChartData = new XYChart.Series<>();
-            salesDAO.setLineChart(lineChartData);
+            salesDAO.setLineChart(lineChartData,Integer.parseInt(year.getText()), month.getText());
         }
 
         if (pieChartData ==null){
@@ -202,11 +219,39 @@ public class ReportsController implements Initializable {
         ReportsController.lineChartData = lineChartData;
     }
 
+    public static void setCacheReportLineChart(int year, String month, XYChart.Series<String, Integer> lineChartData) {
+        HashMap<String,XYChart.Series<String, Integer>> monthData = new HashMap<>();
+        monthData.put(month,lineChartData);
+        cacheReportLineChart.put(year,monthData);
+    }
+
     public void onExport(ActionEvent actionEvent) {
         switch (cbTypeExport.getValue()){
             case ".PDF"  -> SalesReportGenerator.generatePDFReport(tableReport.getItems(),"src/main/resources/reports/sales_report.pdf");
             case ".XLSX" -> SalesReportGenerator.generateExcelReport(tableReport.getItems(),"src/main/resources/reports/sales_report.xlsx");
             case ".CSV" -> SalesReportGenerator.generateCSVReport(tableReport.getItems(),"src/main/resources/reports/sales_report.csv");
         }
+    }
+
+    public void sumYear(ActionEvent actionEvent) {
+        yearsShowed++;
+        year.setText(String.valueOf(yearsShowed));
+    }
+
+    public void subtractYear(ActionEvent actionEvent) {
+        yearsShowed--;
+        year.setText(String.valueOf(yearsShowed));
+    }
+
+    public void sumMonth(ActionEvent actionEvent) {
+        if (idxMonth==11) return;
+        idxMonth++;
+        month.setText(monthsShowed[idxMonth]);
+    }
+
+    public void subtractMonth(ActionEvent actionEvent) {
+        if (idxMonth==0) return;
+        idxMonth--;
+        month.setText(monthsShowed[idxMonth]);
     }
 }

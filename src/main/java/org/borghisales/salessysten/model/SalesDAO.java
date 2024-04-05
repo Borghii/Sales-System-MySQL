@@ -5,8 +5,10 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
+import org.borghisales.salessysten.controllers.ReportsController;
 
 import java.sql.*;
+import java.util.HashMap;
 
 public class SalesDAO {
 
@@ -110,7 +112,7 @@ public class SalesDAO {
 
     }
 
-    public void setLineChart(XYChart.Series<String, Integer> lineChartData) {
+    public void setLineChart(XYChart.Series<String, Integer> lineChartData,int year,String month) {
         String sql = """ 
                 SELECT saleDate, count(saleDate) as salesPerDay
                 FROM sales
@@ -128,6 +130,8 @@ public class SalesDAO {
                     lineChartData.getData().add(new XYChart.Data<>(rs.getDate("saleDate").toLocalDate().toString(),rs.getInt("salesPerDay")));
                 }
             }
+
+            ReportsController.setCacheReportLineChart(year,month,lineChartData);
 
         }catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());

@@ -5,6 +5,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import org.borghisales.salessysten.controllers.MainController;
 import org.borghisales.salessysten.controllers.MenuController;
+import org.borghisales.salessysten.controllers.ReportsController;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -184,6 +185,7 @@ public class ProductDAO implements CRUD<Product>{
                     pieChartData.add(new PieChart.Data(rs.getString("name"),rs.getInt("cant")));
                 }
             }
+
 
         }catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());

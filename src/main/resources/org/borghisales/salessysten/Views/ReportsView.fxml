@@ -18,13 +18,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="778.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ReportsController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="821.0" prefWidth="1127.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ReportsController">
   <tabs>
     <Tab text="SALES HISTORY">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="537.0" prefWidth="816.0">
                <children>
-                  <TableView fx:id="tableReport" layoutX="19.0" layoutY="123.0" prefHeight="357.0" prefWidth="743.0">
+                  <TableView fx:id="tableReport" layoutX="19.0" layoutY="123.0" prefHeight="611.0" prefWidth="1087.0">
                     <columns>
                       <TableColumn fx:id="colIdSales" prefWidth="75.0" text="idSales" />
                       <TableColumn fx:id="colIdCustomer" prefWidth="75.0" text="idCustomer" />
@@ -38,27 +38,27 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <DatePicker fx:id="minDate" layoutX="384.0" layoutY="61.0" prefHeight="25.0" prefWidth="92.0" />
-                  <Button layoutX="660.0" layoutY="59.0" mnemonicParsing="false" onAction="#onFilter" prefHeight="32.0" prefWidth="94.0" text="FILTER" />
-                  <DatePicker fx:id="maxDate" layoutX="494.0" layoutY="62.0" prefHeight="25.0" prefWidth="92.0" />
-                  <TextField fx:id="minAmount" layoutX="183.0" layoutY="60.0" prefHeight="27.0" prefWidth="78.0" />
-                  <TextField fx:id="maxAmount" layoutX="280.0" layoutY="60.0" prefHeight="27.0" prefWidth="78.0" />
-                  <Label layoutX="241.0" layoutY="26.0" text="AMOUNT" underline="true" wrapText="true">
+                  <DatePicker fx:id="minDate" layoutX="739.0" layoutY="64.0" prefHeight="25.0" prefWidth="92.0" />
+                  <Button layoutX="1006.0" layoutY="59.0" mnemonicParsing="false" onAction="#onFilter" prefHeight="32.0" prefWidth="94.0" text="FILTER" />
+                  <DatePicker fx:id="maxDate" layoutX="849.0" layoutY="65.0" prefHeight="25.0" prefWidth="92.0" />
+                  <TextField fx:id="minAmount" layoutX="538.0" layoutY="63.0" prefHeight="27.0" prefWidth="78.0" />
+                  <TextField fx:id="maxAmount" layoutX="635.0" layoutY="63.0" prefHeight="27.0" prefWidth="78.0" />
+                  <Label layoutX="596.0" layoutY="29.0" text="AMOUNT" underline="true" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="264.0" layoutY="47.0" prefHeight="21.0" prefWidth="18.0" text="-" wrapText="true">
+                  <Label layoutX="619.0" layoutY="50.0" prefHeight="21.0" prefWidth="18.0" text="-" wrapText="true">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label layoutX="477.0" layoutY="47.0" prefHeight="21.0" prefWidth="18.0" text="-" wrapText="true">
+                  <Label layoutX="832.0" layoutY="50.0" prefHeight="21.0" prefWidth="18.0" text="-" wrapText="true">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label layoutX="466.0" layoutY="27.0" text="DATE" underline="true" wrapText="true">
+                  <Label layoutX="821.0" layoutY="30.0" text="DATE" underline="true" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -68,27 +68,27 @@
                         <Image url="@../../../../images/report.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="660.0" layoutY="491.0" mnemonicParsing="false" onAction="#onExport" prefHeight="32.0" prefWidth="94.0" text="EXPORT " />
-                  <ComboBox fx:id="cbTypeExport" layoutX="540.0" layoutY="491.0" prefHeight="32.0" prefWidth="108.0" style="-fx-alignment: CENTER;" />
+                  <Button layoutX="1006.0" layoutY="746.0" mnemonicParsing="false" onAction="#onExport" prefHeight="32.0" prefWidth="94.0" text="EXPORT " />
+                  <ComboBox fx:id="cbTypeExport" layoutX="882.0" layoutY="746.0" prefHeight="32.0" prefWidth="108.0" style="-fx-alignment: CENTER;" />
                </children></AnchorPane>
       </content>
     </Tab>
     <Tab text="STATISTICS">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="710.0" prefWidth="1103.0">
                <children>
-                  <PieChart fx:id="pieChartProducts" layoutX="14.0" layoutY="87.0" prefHeight="368.0" prefWidth="388.0" />
-                  <Label layoutX="86.0" layoutY="57.0" text="AMOUNT PRODUCST SOLD" underline="true" wrapText="true">
+                  <PieChart fx:id="pieChartProducts" layoutX="21.0" layoutY="124.0" prefHeight="500.0" prefWidth="543.0" />
+                  <Label layoutX="117.0" layoutY="38.0" text="AMOUNT PRODUCST SOLD" underline="true" wrapText="true">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="32.0" />
                      </font>
                   </Label>
-                  <Label layoutX="487.0" layoutY="57.0" text="SALES OVER TIME" underline="true" wrapText="true">
+                  <Label layoutX="724.0" layoutY="38.0" text="SALES OVER TIME" underline="true" wrapText="true">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="32.0" />
                      </font>
                   </Label>
-                  <LineChart fx:id="salesLineChart" layoutX="373.0" layoutY="128.0" prefHeight="320.0" prefWidth="386.0">
+                  <LineChart fx:id="salesLineChart" createSymbols="false" layoutX="559.0" layoutY="115.0" legendVisible="false" prefHeight="509.0" prefWidth="556.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" fx:id="x_time" />
                     </xAxis>
@@ -96,6 +96,22 @@
                       <NumberAxis fx:id="y_amountSales" side="LEFT" />
                     </yAxis>
                   </LineChart>
+                  <Label layoutX="807.0" layoutY="687.0" prefHeight="42.0" prefWidth="89.0" text="MONTH" underline="true" wrapText="true">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="821.0" layoutY="616.0" prefHeight="42.0" prefWidth="59.0" text="YEAR" underline="true" wrapText="true">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="year" alignment="CENTER" editable="false" layoutX="801.0" layoutY="658.0" prefHeight="18.0" prefWidth="102.0" />
+                  <TextField fx:id="month" alignment="CENTER" editable="false" layoutX="801.0" layoutY="729.0" prefHeight="18.0" prefWidth="102.0" />
+                  <Button layoutX="915.0" layoutY="658.0" mnemonicParsing="false" onAction="#sumYear" text="-&gt;" />
+                  <Button layoutX="915.0" layoutY="729.0" mnemonicParsing="false" onAction="#sumMonth" text="-&gt;" />
+                  <Button layoutX="762.0" layoutY="658.0" mnemonicParsing="false" onAction="#subtractYear" text="&lt;-" />
+                  <Button layoutX="761.0" layoutY="729.0" mnemonicParsing="false" onAction="#subtractMonth" text="&lt;-" />
                </children></AnchorPane>
       </content>
     </Tab>
