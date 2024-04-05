@@ -8,6 +8,7 @@ import org.borghisales.salessysten.controllers.MenuController;
 import org.borghisales.salessysten.controllers.ReportsController;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class SalesDAO {
@@ -112,26 +113,36 @@ public class SalesDAO {
 
     }
 
-    public void setLineChart(XYChart.Series<String, Integer> lineChartData,int year,String month) {
+    public void setLineChart(XYChart.Series<String, Integer> lineChartData,int year,int month) {
         String sql = """ 
-                SELECT saleDate, count(saleDate) as salesPerDay
+                SELECT day(saleDate) as saleDate, count(saleDate) as salesPerDay
                 FROM sales
-                WHERE idSeller=?
+                WHERE idSeller=? and year(saleDate) = ? and month(saleDate)=?
                 GROUP BY saleDate;
                 """;
+
+
+        System.out.println("Buscado base de datos");
+
 
         try (Connection conn = DBConnection.connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
 
             pstmt.setInt(1, MainController.sellerLog.idSeller());
+            pstmt.setInt(2, year);
+            pstmt.setInt(3, month);
 
             try (ResultSet rs = pstmt.executeQuery()){
                 while (rs.next()){
-                    lineChartData.getData().add(new XYChart.Data<>(rs.getDate("saleDate").toLocalDate().toString(),rs.getInt("salesPerDay")));
+                    XYChart.Data<String,Integer> data = new XYChart.Data<>(String.valueOf(rs.getInt("saleDate")),rs.getInt("salesPerDay"));
+                    lineChartData.getData().add(data);
                 }
             }
 
+
             ReportsController.setCacheReportLineChart(year,month,lineChartData);
+
+
 
         }catch (SQLException e){
             MenuController.setAlert(Alert.AlertType.ERROR, "Error searching sales : " + e.getMessage());

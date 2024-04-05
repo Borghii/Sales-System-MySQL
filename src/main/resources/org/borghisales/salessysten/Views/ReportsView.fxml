@@ -18,13 +18,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="821.0" prefWidth="1127.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ReportsController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1028.0" prefWidth="1465.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.borghisales.salessysten.controllers.ReportsController">
   <tabs>
     <Tab text="SALES HISTORY">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="537.0" prefWidth="816.0">
                <children>
-                  <TableView fx:id="tableReport" layoutX="19.0" layoutY="123.0" prefHeight="611.0" prefWidth="1087.0">
+                  <TableView fx:id="tableReport" layoutX="19.0" layoutY="123.0" prefHeight="818.0" prefWidth="1430.0">
                     <columns>
                       <TableColumn fx:id="colIdSales" prefWidth="75.0" text="idSales" />
                       <TableColumn fx:id="colIdCustomer" prefWidth="75.0" text="idCustomer" />
@@ -38,27 +38,27 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <DatePicker fx:id="minDate" layoutX="739.0" layoutY="64.0" prefHeight="25.0" prefWidth="92.0" />
-                  <Button layoutX="1006.0" layoutY="59.0" mnemonicParsing="false" onAction="#onFilter" prefHeight="32.0" prefWidth="94.0" text="FILTER" />
-                  <DatePicker fx:id="maxDate" layoutX="849.0" layoutY="65.0" prefHeight="25.0" prefWidth="92.0" />
-                  <TextField fx:id="minAmount" layoutX="538.0" layoutY="63.0" prefHeight="27.0" prefWidth="78.0" />
-                  <TextField fx:id="maxAmount" layoutX="635.0" layoutY="63.0" prefHeight="27.0" prefWidth="78.0" />
-                  <Label layoutX="596.0" layoutY="29.0" text="AMOUNT" underline="true" wrapText="true">
+                  <DatePicker fx:id="minDate" layoutX="1088.0" layoutY="75.0" prefHeight="25.0" prefWidth="92.0" />
+                  <Button layoutX="1355.0" layoutY="70.0" mnemonicParsing="false" onAction="#onFilter" prefHeight="32.0" prefWidth="94.0" text="FILTER" />
+                  <DatePicker fx:id="maxDate" layoutX="1198.0" layoutY="76.0" prefHeight="25.0" prefWidth="92.0" />
+                  <TextField fx:id="minAmount" layoutX="887.0" layoutY="74.0" prefHeight="27.0" prefWidth="78.0" />
+                  <TextField fx:id="maxAmount" layoutX="984.0" layoutY="74.0" prefHeight="27.0" prefWidth="78.0" />
+                  <Label layoutX="945.0" layoutY="40.0" text="AMOUNT" underline="true" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="619.0" layoutY="50.0" prefHeight="21.0" prefWidth="18.0" text="-" wrapText="true">
+                  <Label layoutX="968.0" layoutY="61.0" prefHeight="21.0" prefWidth="18.0" text="-" wrapText="true">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label layoutX="832.0" layoutY="50.0" prefHeight="21.0" prefWidth="18.0" text="-" wrapText="true">
+                  <Label layoutX="1181.0" layoutY="61.0" prefHeight="21.0" prefWidth="18.0" text="-" wrapText="true">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label layoutX="821.0" layoutY="30.0" text="DATE" underline="true" wrapText="true">
+                  <Label layoutX="1170.0" layoutY="41.0" text="DATE" underline="true" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -68,8 +68,8 @@
                         <Image url="@../../../../images/report.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="1006.0" layoutY="746.0" mnemonicParsing="false" onAction="#onExport" prefHeight="32.0" prefWidth="94.0" text="EXPORT " />
-                  <ComboBox fx:id="cbTypeExport" layoutX="882.0" layoutY="746.0" prefHeight="32.0" prefWidth="108.0" style="-fx-alignment: CENTER;" />
+                  <Button layoutX="1357.0" layoutY="953.0" mnemonicParsing="false" onAction="#onExport" prefHeight="32.0" prefWidth="94.0" text="EXPORT " />
+                  <ComboBox fx:id="cbTypeExport" layoutX="1233.0" layoutY="953.0" prefHeight="32.0" prefWidth="108.0" style="-fx-alignment: CENTER;" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -77,18 +77,18 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="710.0" prefWidth="1103.0">
                <children>
-                  <PieChart fx:id="pieChartProducts" layoutX="21.0" layoutY="124.0" prefHeight="500.0" prefWidth="543.0" />
-                  <Label layoutX="117.0" layoutY="38.0" text="AMOUNT PRODUCST SOLD" underline="true" wrapText="true">
+                  <PieChart fx:id="pieChartProducts" layoutX="14.0" layoutY="142.0" prefHeight="654.0" prefWidth="750.0" />
+                  <Label layoutX="211.0" layoutY="61.0" text="AMOUNT PRODUCST SOLD" underline="true" wrapText="true">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <Label layoutX="724.0" layoutY="38.0" text="SALES OVER TIME" underline="true" wrapText="true">
+                  <Label layoutX="958.0" layoutY="62.0" text="SALES OVER TIME" underline="true" wrapText="true">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <LineChart fx:id="salesLineChart" createSymbols="false" layoutX="559.0" layoutY="115.0" legendVisible="false" prefHeight="509.0" prefWidth="556.0">
+                  <LineChart fx:id="salesLineChart" createSymbols="false" layoutX="753.0" layoutY="142.0" legendVisible="false" prefHeight="634.0" prefWidth="691.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" fx:id="x_time" />
                     </xAxis>
@@ -96,22 +96,22 @@
                       <NumberAxis fx:id="y_amountSales" side="LEFT" />
                     </yAxis>
                   </LineChart>
-                  <Label layoutX="807.0" layoutY="687.0" prefHeight="42.0" prefWidth="89.0" text="MONTH" underline="true" wrapText="true">
+                  <Label layoutX="1070.0" layoutY="874.0" prefHeight="42.0" prefWidth="89.0" text="MONTH" underline="true" wrapText="true">
                      <font>
                         <Font size="23.0" />
                      </font>
                   </Label>
-                  <Label layoutX="821.0" layoutY="616.0" prefHeight="42.0" prefWidth="59.0" text="YEAR" underline="true" wrapText="true">
+                  <Label layoutX="1084.0" layoutY="803.0" prefHeight="42.0" prefWidth="59.0" text="YEAR" underline="true" wrapText="true">
                      <font>
                         <Font size="23.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="year" alignment="CENTER" editable="false" layoutX="801.0" layoutY="658.0" prefHeight="18.0" prefWidth="102.0" />
-                  <TextField fx:id="month" alignment="CENTER" editable="false" layoutX="801.0" layoutY="729.0" prefHeight="18.0" prefWidth="102.0" />
-                  <Button layoutX="915.0" layoutY="658.0" mnemonicParsing="false" onAction="#sumYear" text="-&gt;" />
-                  <Button layoutX="915.0" layoutY="729.0" mnemonicParsing="false" onAction="#sumMonth" text="-&gt;" />
-                  <Button layoutX="762.0" layoutY="658.0" mnemonicParsing="false" onAction="#subtractYear" text="&lt;-" />
-                  <Button layoutX="761.0" layoutY="729.0" mnemonicParsing="false" onAction="#subtractMonth" text="&lt;-" />
+                  <TextField fx:id="year" alignment="CENTER" editable="false" layoutX="1064.0" layoutY="845.0" prefHeight="18.0" prefWidth="102.0" />
+                  <TextField fx:id="month" alignment="CENTER" editable="false" layoutX="1064.0" layoutY="916.0" prefHeight="18.0" prefWidth="102.0" />
+                  <Button layoutX="1178.0" layoutY="845.0" mnemonicParsing="false" onAction="#sumYear" text="-&gt;" />
+                  <Button layoutX="1178.0" layoutY="916.0" mnemonicParsing="false" onAction="#sumMonth" text="-&gt;" />
+                  <Button layoutX="1025.0" layoutY="845.0" mnemonicParsing="false" onAction="#subtractYear" text="&lt;-" />
+                  <Button layoutX="1024.0" layoutY="916.0" mnemonicParsing="false" onAction="#subtractMonth" text="&lt;-" />
                </children></AnchorPane>
       </content>
     </Tab>

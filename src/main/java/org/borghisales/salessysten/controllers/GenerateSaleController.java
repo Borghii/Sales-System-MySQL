@@ -183,8 +183,8 @@ public class GenerateSaleController extends MenuController implements Initializa
         if (salesDAO.SaveSale(sales) && salesDAO.SaveDetailsSale(products,idSale) ){
             productDAO.subtractStock(products);
             MenuController.setAlert(Alert.AlertType.CONFIRMATION,"Successful Sale");
-            MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
-            quantity.getValueFactory().setValue(null);
+            //MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
+            //quantity.getValueFactory().setValue(null);
             tableSale.getItems().clear();
             setSerial();
             total.setText("0.0");
@@ -194,6 +194,7 @@ public class GenerateSaleController extends MenuController implements Initializa
             ReportsController.setSales(null);
             ReportsController.setPieChartData(null);
             ReportsController.setLineChartData(null);
+            ReportsController.removeCacheLineChart(now.getYear(),now.getMonth().getValue());
         }
 
     }
