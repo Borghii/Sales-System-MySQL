@@ -8,6 +8,7 @@ import org.borghisales.salessysten.controllers.MenuController;
 import org.borghisales.salessysten.controllers.ReportsController;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class SalesDAO {
@@ -112,11 +113,11 @@ public class SalesDAO {
 
     }
 
-    public void setLineChart(XYChart.Series<String, Integer> lineChartData,int year,String month) {
+    public void setLineChart(XYChart.Series<String, Integer> lineChartData,int year,int month) {
         String sql = """ 
                 SELECT saleDate, count(saleDate) as salesPerDay
                 FROM sales
-                WHERE idSeller=?
+                WHERE idSeller=? and year(saleDate) = ? and month(saleDate)=?
                 GROUP BY saleDate;
                 """;
 
@@ -124,6 +125,8 @@ public class SalesDAO {
              PreparedStatement pstmt = conn.prepareStatement(sql)){
 
             pstmt.setInt(1, MainController.sellerLog.idSeller());
+            pstmt.setInt(2, year);
+            pstmt.setInt(3, month);
 
             try (ResultSet rs = pstmt.executeQuery()){
                 while (rs.next()){

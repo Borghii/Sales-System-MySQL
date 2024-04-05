@@ -39,7 +39,7 @@ public class ReportsController implements Initializable {
     private static int yearsShowed = LocalDate.now().getYear();
 
 
-    private static HashMap<Integer,HashMap<String,XYChart.Series<String,Integer>>> cacheReportLineChart=null;
+    private static HashMap<Integer,HashMap<Integer,XYChart.Series<String,Integer>>> cacheReportLineChart= new HashMap<>();
 
     private final ObservableList<String> exportList = FXCollections.observableArrayList(".PDF",".XLSX",".CSV");
 
@@ -144,7 +144,7 @@ public class ReportsController implements Initializable {
 
         if (lineChartData == null){
             lineChartData = new XYChart.Series<>();
-            salesDAO.setLineChart(lineChartData,Integer.parseInt(year.getText()), month.getText());
+            salesDAO.setLineChart(lineChartData,Integer.parseInt(year.getText()), idxMonth+1);
         }
 
         if (pieChartData ==null){
@@ -219,9 +219,9 @@ public class ReportsController implements Initializable {
         ReportsController.lineChartData = lineChartData;
     }
 
-    public static void setCacheReportLineChart(int year, String month, XYChart.Series<String, Integer> lineChartData) {
-        HashMap<String,XYChart.Series<String, Integer>> monthData = new HashMap<>();
-        monthData.put(month,lineChartData);
+    public static void setCacheReportLineChart(int year, int month, XYChart.Series<String, Integer> lineChartData) {
+        HashMap<Integer,XYChart.Series<String, Integer>> monthData = new HashMap<>();
+        monthData.put(month-1,lineChartData);
         cacheReportLineChart.put(year,monthData);
     }
 
@@ -246,12 +246,40 @@ public class ReportsController implements Initializable {
     public void sumMonth(ActionEvent actionEvent) {
         if (idxMonth==11) return;
         idxMonth++;
+
+        if (checkCacheLineChart())
+            salesDAO.setLineChart(lineChartData,Integer.parseInt(year.getText()), idxMonth+1);
+        else {
+            lineChartData = cacheReportLineChart.get(yearsShowed).get(idxMonth);
+        }
+
+        salesLineChart.getData().clear();
+        salesLineChart.getData().addAll(lineChartData);
+
+
         month.setText(monthsShowed[idxMonth]);
+
     }
 
     public void subtractMonth(ActionEvent actionEvent) {
         if (idxMonth==0) return;
         idxMonth--;
+
+
+
+        if (checkCacheLineChart())
+            salesDAO.setLineChart(lineChartData,Integer.parseInt(year.getText()), idxMonth+1);
+        else {
+            lineChartData = cacheReportLineChart.get(yearsShowed).get(idxMonth);
+        }
+        salesLineChart.getData().clear();
+
+        salesLineChart.getData().addAll(lineChartData);
+
         month.setText(monthsShowed[idxMonth]);
+    }
+
+    private static boolean checkCacheLineChart(){
+        return cacheReportLineChart.get(yearsShowed).get(idxMonth) == null;
     }
 }
