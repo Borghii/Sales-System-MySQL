@@ -94,9 +94,19 @@ public class ReportsController implements Initializable {
     private TableColumn<Sales, Sales.State> colState;
 
     public static void removeCacheLineChart(int year, int month) {
-        cacheReportLineChart.get(year).remove(month);
-        lineChartData = null;
+        if (cacheReportLineChart != null && cacheReportLineChart.containsKey(year)) {
+            HashMap<Integer, XYChart.Series<String, Integer>> yearData = cacheReportLineChart.get(year);
+            if (yearData != null && yearData.containsKey(month)) {
+                yearData.remove(month);
+                lineChartData = null;
+            } else {
+                System.err.println("No cache found for month " + month + " in year " + year);
+            }
+        } else {
+            System.err.println("No cache found for year " + year);
+        }
     }
+
 
 
     @Override
@@ -300,11 +310,54 @@ public class ReportsController implements Initializable {
 
     public void sumYear(ActionEvent actionEvent) {
         yearsShowed++;
+
+
+        lineChartData.getData().clear();
+
+
+        if (checkCache()){
+            salesDAO.setLineChart(lineChartData,yearsShowed, idxMonth+1);
+        }else {
+            lineChartData.getData().addAll(cacheReportLineChart.get(yearsShowed).get(idxMonth+1).getData());
+        }
+
+
+
+        fillMissingDays(lineChartData);
+
+
+        salesLineChart.getData().clear();
+        salesLineChart.getData().add(lineChartData);
+
+
         year.setText(String.valueOf(yearsShowed));
     }
 
     public void subtractYear(ActionEvent actionEvent) {
         yearsShowed--;
+
+
+        lineChartData.getData().clear();
+
+
+        if (checkCache()){
+            salesDAO.setLineChart(lineChartData,yearsShowed, idxMonth+1);
+        }else {
+            lineChartData.getData().addAll(cacheReportLineChart.get(yearsShowed).get(idxMonth+1).getData());
+        }
+
+
+
+        fillMissingDays(lineChartData);
+
+
+        salesLineChart.getData().clear();
+        salesLineChart.getData().add(lineChartData);
+
+
+
+
+
         year.setText(String.valueOf(yearsShowed));
     }
 
@@ -382,7 +435,14 @@ public class ReportsController implements Initializable {
     }
 
     private static boolean checkCache(){
-        return cacheReportLineChart.get(yearsShowed).get(idxMonth+1) == null;
+        // Verifica primero si el año no es nulo
+        if (cacheReportLineChart.get(yearsShowed) != null) {
+            // Si el año no es nulo, entonces puedes verificar si el dato para el mes es nulo o no
+            return cacheReportLineChart.get(yearsShowed).get(idxMonth + 1) == null;
+        } else {
+            // Si el año es nulo, puedes devolver false o cualquier valor que sea apropiado para tu lógica
+            return true;
+        }
     }
 
     public void fillMissingDays(XYChart.Series<String, Integer> lineChartData) {

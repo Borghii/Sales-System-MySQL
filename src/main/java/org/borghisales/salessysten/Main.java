@@ -13,12 +13,12 @@ public class Main extends Application {
     @Override
     public void init() throws Exception {
         super.init();
-        map.put(MANAGEMENT_VIEW_FXML, MAIN_VIEW_FXML);
-        map.put(SELLER_VIEW_FXML, MANAGEMENT_VIEW_FXML);
-        map.put(PRODUCT_VIEW_FXML, MANAGEMENT_VIEW_FXML);
-        map.put(CUSTOMER_VIEW_FXML, MANAGEMENT_VIEW_FXML);
-        map.put(GENERATE_SALE_VIEW_FXML, MANAGEMENT_VIEW_FXML);
-        map.put(REPORT_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        filePaths.put(MANAGEMENT_VIEW_FXML, MAIN_VIEW_FXML);
+        filePaths.put(SELLER_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        filePaths.put(PRODUCT_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        filePaths.put(CUSTOMER_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        filePaths.put(GENERATE_SALE_VIEW_FXML, MANAGEMENT_VIEW_FXML);
+        filePaths.put(REPORT_VIEW_FXML, MANAGEMENT_VIEW_FXML);
     }
 
     @Override
