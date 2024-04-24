@@ -138,8 +138,11 @@ La pantalla principal muestra las siguientes ventanas
 </p>
 
 ## Sales
+https://github.com/Borghii/Sales-System/assets/137845283/60872beb-31af-47b0-b84d-83f9b4807ac5
 ## Management
+https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b-218c9ca25b10
 ## Reports
+https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
 
 # 📝 Licencia
 
