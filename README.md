@@ -148,4 +148,4 @@ https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793
 
 Este proyecto está bajo licencia. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
-[⬆ Back to the top](#title)<br>
+[⬆ Volver al inicio](#title)<br>
