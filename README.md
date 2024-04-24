@@ -24,6 +24,7 @@
         * [Sales](#sales)
         * [Management](#management)
         * [Reports](#reports)
+* [📧 Contacto](#-contacto)
 * [📝 Licencia](#-licencia)
 <!-- TOC -->
 
@@ -143,6 +144,10 @@ https://github.com/Borghii/Sales-System/assets/137845283/60872beb-31af-47b0-b84d
 https://github.com/Borghii/Sales-System/assets/137845283/4f85ec7c-f2de-44ae-815b-218c9ca25b10
 ## Reports
 https://github.com/Borghii/Sales-System/assets/137845283/f85f1026-6693-4152-a793-6bfe02a8869f
+
+# 📧 Contacto
+Si tienes alguna pregunta, sugerencia o crítica sobre el proyecto, no dudes en contactarme por correo electrónico a [tomasborghi13@gmail.com](mailto:tomasborghi13@gmail.com).
+
 
 # 📝 Licencia
 
