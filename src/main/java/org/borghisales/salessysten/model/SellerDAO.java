@@ -44,10 +44,6 @@ public class SellerDAO implements CRUD<Seller> {
 
     }
 
-    @Override
-    public boolean read(int id) {
-        return false;
-    }
 
     @Override
     public boolean update(Seller entity) {

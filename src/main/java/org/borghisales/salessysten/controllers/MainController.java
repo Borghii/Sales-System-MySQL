@@ -20,8 +20,8 @@ public class MainController extends MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        user.setText("44994806");
-        password.setText("chimu");
+//        user.setText("44994806");
+//        password.setText("chimu");
 
         //In case the user is changed, the reports of that user should be updated.
         ReportsController.setSales(null);

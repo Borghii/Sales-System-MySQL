@@ -57,10 +57,7 @@ public class CustomerDAO implements CRUD<Customer> {
         }
     }
 
-    @Override
-    public boolean read(int id) {
-        return false;
-    }
+
 
     @Override
     public boolean update(Customer entity) {

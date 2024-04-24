@@ -8,8 +8,7 @@ import org.borghisales.salessysten.controllers.MenuController;
 import org.borghisales.salessysten.controllers.ReportsController;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.HashMap;
+
 
 public class SalesDAO {
 
