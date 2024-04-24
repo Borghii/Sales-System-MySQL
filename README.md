@@ -16,7 +16,7 @@
     * [Configuracion de la Base de Datos](#configuración-de-la-base-de-datos)
     * [Ejecucion del Proyecto](#ejecución-del-proyecto)
     * [Modificacion de las Vistas con Scene Builder](#modificación-de-las-vistas-con-scene-builder)
-* [🧬  Estructura Basica](#-estructura-basica)
+* [🧬 Estructura Basica](#-estructura-basica)
 * [🗄️ Diagrama de Base de Datos](#-diagrama-de-base-de-datos)
 * [💡 Fucionalidades](#-fucionalidades)
     * [Inicio de Sesion](#inicio-de-sesión)
@@ -89,7 +89,7 @@ Si deseas modificar las vistas de la aplicación, puedes utilizar Scene Builder,
 1. Descarga Scene Builder: Puedes descargar Scene Builder desde el sitio web oficial de Gluon https://gluonhq.com/products/scene-builder/.
 2. Instalación: Una vez descargado, sigue las instrucciones de instalación para tu sistema operativo.
 
-# 🧬  Estructura Basica
+# 🧬 Estructura Basica
 <pre>
 + java
   |-- controllers // controladores de la aplicacion
