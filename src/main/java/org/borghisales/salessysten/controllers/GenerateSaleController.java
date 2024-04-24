@@ -88,33 +88,30 @@ public class GenerateSaleController extends MenuController implements Initializa
     private TableColumn<ShoppingCart,Double> colTotal;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeUIElements();
+        configureAlerts();
+        configureTable();
+    }
+
+    private void initializeUIElements() {
         System.out.println(idSeller);
-
-        // Set total to initial value
         total.setText("0.0");
-
-        // Set serial
         setSerial();
-
-        // Set seller name
         seller.setText(sellerName);
-
-        // Set current date
         date.setText(String.valueOf(now));
+    }
 
-        // Configure defaultAlert dialogs
+    private void configureAlerts() {
         configureAlert(alertCustomer, "New customer", "The customer doesn't exist", "Do you want to add it?");
         configureAlert(alertProduct, "New Product", "The product doesn't exist", "Do you want to add it?");
+    }
 
-        // Configure table columns
+    private void configureTable() {
         configureTableColumns();
-
-        // Clear table items
         tableSale.getItems().clear();
-
-        // Initialize products list
         products = FXCollections.observableArrayList();
     }
+
 
     private void configureAlert(Alert alert, String title, String header, String content) {
         alert.setTitle(title);
@@ -214,6 +211,7 @@ public class GenerateSaleController extends MenuController implements Initializa
 
 
     public void cancel(ActionEvent actionEvent) {
+        if (products.isEmpty())return;
         MenuController.cleanCells(codCustomer,codProduct,customerName,productName,price,stock);
         quantity.getValueFactory().setValue(null);
         tableSale.getItems().clear();

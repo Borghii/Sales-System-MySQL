@@ -3,9 +3,12 @@ package org.borghisales.salessysten.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 
+import java.awt.*;
+import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,7 +25,7 @@ public class ManagementController extends MenuController implements Initializabl
     @FXML
     void openSeller(ActionEvent actionEvent){
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(SELLER_VIEW_FXML);
+        openNewStage(SELLER_VIEW_FXML,"Seller");
         closeCurrentStage(sellerButton);
     }
 
@@ -34,35 +37,42 @@ public class ManagementController extends MenuController implements Initializabl
 
     public void openCustomer(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(CUSTOMER_VIEW_FXML);
+        openNewStage(CUSTOMER_VIEW_FXML, "Customer");
         closeCurrentStage(sellerButton);
 
     }
 
     public void openProduct(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(PRODUCT_VIEW_FXML);
+        openNewStage(PRODUCT_VIEW_FXML,"Products");
         closeCurrentStage(sellerButton);
 
     }
 
     public void openGenerateSale(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(GENERATE_SALE_VIEW_FXML);
+        openNewStage(GENERATE_SALE_VIEW_FXML,"Shopping cart");
         closeCurrentStage(sellerButton);
     }
     public void openSalesReport(ActionEvent actionEvent) {
         lastTab = tabPaneManage.getSelectionModel().getSelectedIndex();
-        openNewStage(REPORT_VIEW_FXML);
+        openNewStage(REPORT_VIEW_FXML,"Sales");
         closeCurrentStage(sellerButton);
 
     }
 
     public void help(ActionEvent actionEvent) {
+        try {
+            Desktop.getDesktop().browse(new URI("https://github.com/Borghii/Sales-System"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            setAlert(Alert.AlertType.ERROR,"The URL could not be opened. Check your internet connection.");
+        }
+
     }
 
     public void exit(ActionEvent actionEvent) {
-        openNewStage(MAIN_VIEW_FXML);
+        openNewStage(MAIN_VIEW_FXML,"Login");
         closeCurrentStage(sellerButton);
     }
 

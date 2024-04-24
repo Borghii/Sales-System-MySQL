@@ -25,49 +25,61 @@ public class SaleDetailController implements Initializable {
     private static int idSale;
 
     @FXML
-    public  TableView<ShoppingCart> tableSale;
+    private   TableView<ShoppingCart> tableSale;
     @FXML
-    public TableColumn<ShoppingCart,Integer> colNro;
+    private TableColumn<ShoppingCart,Integer> colNro;
     @FXML
-    public TableColumn<ShoppingCart,String> colCod;
+    private TableColumn<ShoppingCart,String> colCod;
     @FXML
-    public TableColumn<ShoppingCart,String> colProduct;
+    private TableColumn<ShoppingCart,String> colProduct;
     @FXML
-    public TableColumn<ShoppingCart, Integer> colQuantity;
+    private TableColumn<ShoppingCart, Integer> colQuantity;
     @FXML
-    public TableColumn<ShoppingCart, Double> colPrice;
+    private TableColumn<ShoppingCart, Double> colPrice;
     @FXML
-    public TableColumn<ShoppingCart,Double> colTotal;
-    public TextField totalSale;
+    private TableColumn<ShoppingCart,Double> colTotal;
+    @FXML
+    private TextField totalSale;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        configureTableColumns();
+        clearTableItems();
+        loadProductsDetails();
+        displayTotal();
+        displayProductsDetails();
+    }
 
+    private void configureTableColumns() {
+        colNro.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().nr()).asObject());
+        colCod.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().cod()));
+        colProduct.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().product()));
+        colQuantity.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().quantity()).asObject());
+        colPrice.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().price()).asObject());
+        colTotal.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().total()).asObject());
+    }
 
-        colNro.setCellValueFactory(p->new SimpleIntegerProperty(p.getValue().nr()).asObject());
-        colCod.setCellValueFactory(p->new SimpleStringProperty(p.getValue().cod()));
-        colProduct.setCellValueFactory(p->new SimpleStringProperty(p.getValue().product()));
-        colQuantity.setCellValueFactory(p->new SimpleIntegerProperty(p.getValue().quantity()).asObject());
-        colPrice.setCellValueFactory(p->new SimpleDoubleProperty(p.getValue().price()).asObject());
-        colTotal.setCellValueFactory(p->new SimpleDoubleProperty(p.getValue().total()).asObject());
-
+    private void clearTableItems() {
         tableSale.getItems().clear();
+    }
 
+    private void loadProductsDetails() {
         productsDetails = FXCollections.observableArrayList();
+        salesDAO.setTableDetails(productsDetails, idSale);
+    }
 
-        salesDAO.setTableDetails(productsDetails,idSale);
-
+    private void displayTotal() {
         double sumTotal = productsDetails.stream()
                 .mapToDouble(ShoppingCart::total)
                 .sum();
-
         totalSale.setText(String.format("%.2f", sumTotal));
-
-
-        tableSale.setItems(productsDetails);
-
     }
+
+    private void displayProductsDetails() {
+        tableSale.setItems(productsDetails);
+    }
+
 
     public static void setIdSale(int idSale) {
         SaleDetailController.idSale = idSale;

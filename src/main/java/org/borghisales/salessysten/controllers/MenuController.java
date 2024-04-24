@@ -34,14 +34,14 @@ public class MenuController {
     }
 
 
-    public void openNewStage(String fxmlFileName) {
+    public void openNewStage(String fxmlFileName, String title) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource(fxmlFileName));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
-            stage.setTitle("Admin");
+            stage.setTitle(title);
             stage.setScene(scene);
-            configureStageCloseEvent(stage, fxmlFileName);
+            configureStageCloseEvent(stage, fxmlFileName, title);
             stage.show();
 
         } catch (IOException | NullPointerException e) {
@@ -49,10 +49,10 @@ public class MenuController {
         }
     }
 
-    private void configureStageCloseEvent(Stage stage, String fxmlFileName) {
+    private void configureStageCloseEvent(Stage stage, String fxmlFileName, String title) {
         if (!fxmlFileName.equals(MAIN_VIEW_FXML)) {
             stage.setOnCloseRequest(e -> {
-                openNewStage(getFxmlFather(fxmlFileName));
+                openNewStage(getFxmlFather(fxmlFileName),title);
             });
         }
     }
