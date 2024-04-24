@@ -9,14 +9,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.borghisales.salessysten.model.Seller;
 import org.borghisales.salessysten.model.SellerDAO;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SellerController implements Initializable {
@@ -103,6 +101,10 @@ public class SellerController implements Initializable {
     }
 
     public void deleteSeller(ActionEvent actionEvent) {
+        if (Objects.equals(dni.getText(), MainController.sellerLog.dni())){
+            MenuController.setAlert(Alert.AlertType.ERROR,"Cannot delete the current seller");
+            return;
+        }
         if (sellerDAO.delete(dni.getText())){
             MenuController.cleanCells(dni,name,phone,user);
             updateTable();

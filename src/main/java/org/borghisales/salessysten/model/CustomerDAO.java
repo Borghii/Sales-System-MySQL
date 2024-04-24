@@ -24,7 +24,7 @@ public class CustomerDAO implements CRUD<Customer> {
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching customer: " + e.getMessage());
+
             return null;
         }
 
@@ -90,31 +90,38 @@ public class CustomerDAO implements CRUD<Customer> {
 
     @Override
     public boolean delete(String id) {
-        String sql = "DELETE FROM customer where dni=?";
+        String disableConstraintsSQL = "SET foreign_key_checks = 0;";
+        String enableConstraintsSQL = "SET foreign_key_checks = 1;";
+        String deleteCustomerSQL = "DELETE FROM customer WHERE dni=?";
 
         try(Connection conn = DBConnection.connection();
-            PreparedStatement pstmt = conn.prepareStatement(sql))    {
+            PreparedStatement disableConstraintsStmt = conn.prepareStatement(disableConstraintsSQL);
+            PreparedStatement deleteCustomerStmt = conn.prepareStatement(deleteCustomerSQL);
+            PreparedStatement enableConstraintsStmt = conn.prepareStatement(enableConstraintsSQL)) {
 
+            // Disable foreign key restrictions
+            disableConstraintsStmt.executeUpdate();
 
-            pstmt.setString(1,id);
+            // Delete the client
+            deleteCustomerStmt.setString(1, id);
+            int rowsAffected = deleteCustomerStmt.executeUpdate();
 
-            int rows_affected = pstmt.executeUpdate();
+            // Reactivate foreign key constraints
+            enableConstraintsStmt.executeUpdate();
 
-            if (rows_affected>0){
+            if (rowsAffected > 0) {
                 MenuController.setAlert(Alert.AlertType.CONFIRMATION, "Customer deleted correctly");
                 return true;
-            }else{
+            } else {
                 MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting customer: ");
                 return false;
             }
-
-
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting customer: " + e.getMessage());
             return false;
         }
     }
+
 
     @Override
     public void setTable(ObservableList<Customer> customers) {

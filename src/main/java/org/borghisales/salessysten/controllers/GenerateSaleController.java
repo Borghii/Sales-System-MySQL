@@ -94,7 +94,6 @@ public class GenerateSaleController extends MenuController implements Initializa
     }
 
     private void initializeUIElements() {
-        System.out.println(idSeller);
         total.setText("0.0");
         setSerial();
         seller.setText(sellerName);

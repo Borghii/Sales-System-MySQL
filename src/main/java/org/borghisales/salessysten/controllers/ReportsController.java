@@ -99,11 +99,7 @@ public class ReportsController implements Initializable {
             if (yearData != null && yearData.containsKey(month)) {
                 yearData.remove(month);
                 lineChartData = null;
-            } else {
-                System.err.println("No cache found for month " + month + " in year " + year);
             }
-        } else {
-            System.err.println("No cache found for year " + year);
         }
     }
 

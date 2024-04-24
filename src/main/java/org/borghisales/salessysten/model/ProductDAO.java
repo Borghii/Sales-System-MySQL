@@ -47,7 +47,7 @@ public class ProductDAO implements CRUD<Product>{
             }
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error searching product: " + e.getMessage());
+
             return null;
         }
     }
@@ -136,7 +136,7 @@ public class ProductDAO implements CRUD<Product>{
 
 
         }catch (SQLException e){
-            MenuController.setAlert(Alert.AlertType.ERROR, "Error deleting product: " + e.getMessage());
+            MenuController.setAlert(Alert.AlertType.ERROR, "You cannot delete this product because you already have a sale with it");
             return false;
         }
     }
